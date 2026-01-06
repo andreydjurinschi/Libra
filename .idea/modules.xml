@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Libra.iml" filepath="$PROJECT_DIR$/.idea/Libra.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cedint-libra/cedint-libra.iml" filepath="$PROJECT_DIR$/cedint-libra/cedint-libra.iml" />
     </modules>
   </component>
 </project>

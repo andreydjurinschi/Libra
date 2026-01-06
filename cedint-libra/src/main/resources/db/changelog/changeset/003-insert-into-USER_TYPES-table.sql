@@ -1,0 +1,1 @@
+insert into user_types (user_type) values ( 'Administrator', 'Technical Group' )
