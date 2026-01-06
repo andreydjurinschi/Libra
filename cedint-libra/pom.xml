@@ -11,7 +11,6 @@
     <groupId>org.cedacri.spring</groupId>
     <artifactId>cedint-libra</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
     <name>cedint-libra</name>
     <description>cedint-libra</description>
     <url/>
@@ -29,6 +28,8 @@
     </scm>
     <properties>
         <java.version>21</java.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
     </properties>
     <dependencies>
         <dependency>

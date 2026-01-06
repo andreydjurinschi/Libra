@@ -1,1 +1,2 @@
-insert into user_types (user_type) values ( 'Administrator', 'Technical Group' )
+
+insert into USER_TYPES (user_type) values ( 'Administrator'), ('Technical Group');

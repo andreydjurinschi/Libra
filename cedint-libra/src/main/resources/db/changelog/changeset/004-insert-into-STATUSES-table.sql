@@ -1,3 +1,3 @@
-insert into statuses(status) values (
-    'NEW', 'ASSIGNED', 'IN_PROGRESS', 'PENDING'
-)
+
+insert into STATUSES(status)
+values ('NEW'), ('ASSIGNED'), ('IN_PROGRESS'), ('PENDING');
