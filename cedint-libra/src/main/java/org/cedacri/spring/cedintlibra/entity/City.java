@@ -1,5 +1,7 @@
 package org.cedacri.spring.cedintlibra.entity;
 
+import jakarta.persistence.*;
+
 @Entity
 @Table(name = "cities")
 public class City {
