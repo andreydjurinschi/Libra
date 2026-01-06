@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourcePerFileMappings">
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/641eb130-cc6a-42ef-8e61-a8a7c5b061bf/console.sql" value="641eb130-cc6a-42ef-8e61-a8a7c5b061bf" />
+    <file url="file://$PROJECT_DIR$/cedint-libra/src/main/resources/db/changelog/changeset/003-insert-into-USER_TYPES-table.sql" value="641eb130-cc6a-42ef-8e61-a8a7c5b061bf" />
+  </component>
+</project>

@@ -1,2 +1,3 @@
-insert into connection_types(connection_type) values
-( 'remote', 'wi-fi', 'fiber optic' )
+
+insert into CONNECTION_TYPES(connection_type) values
+( 'remote'), ('wi-fi'), ('fiber optic');
