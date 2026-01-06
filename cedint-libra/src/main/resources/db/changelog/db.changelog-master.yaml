@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changeset/001-insert-data-into-CITIES-table.sql
+  - include:
+      file: db/changelog/changeset/002-insert-data-into-CONNECTION_TYPES-table.sql
+  - include:
+      file: db/changelog/changeset/002-insert-data-into-CONNECTION_TYPES-table.sql
+  - include:
+      file: db/changelog/changeset/004-insert-data-into-STATUSES-table.sql
