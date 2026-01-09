@@ -1,6 +1,7 @@
 package org.cedacri.spring.cedintlibra.entity;
 
 import jakarta.persistence.*;
+import org.cedacri.spring.cedintlibra.entity.util_models.GeneralType;
 
 import java.time.LocalDate;
 
@@ -20,8 +21,12 @@ public class Issue {
     @JoinColumn(name = "id_type", nullable = false)
     private IssueType type;
 
-    private String idSubType;
-    private String idProblem;
+    @Enumerated(EnumType.STRING)
+    private GeneralType generalType;
+
+    private String problemTitle;
+
+    @Column(nullable = false)
     private Integer priority;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -39,10 +44,11 @@ public class Issue {
     private User assigned;
 
     private String description;
-    private String assignedDate;
+    private LocalDate assignedDate;
 
     private LocalDate creationDate;
     private LocalDate modifyDate;
+
     private String solution;
 
     public Issue() {}
@@ -67,20 +73,13 @@ public class Issue {
         this.type = type;
     }
 
-    public String getIdSubType() {
-        return idSubType;
+
+    public String getProblemTitle() {
+        return problemTitle;
     }
 
-    public void setIdSubType(String idSubType) {
-        this.idSubType = idSubType;
-    }
-
-    public String getIdProblem() {
-        return idProblem;
-    }
-
-    public void setIdProblem(String idProblem) {
-        this.idProblem = idProblem;
+    public void setProblemTitle(String idProblem) {
+        this.problemTitle = idProblem;
     }
 
     public Integer getPriority() {
@@ -131,11 +130,11 @@ public class Issue {
         this.description = description;
     }
 
-    public String getAssignedDate() {
+    public LocalDate getAssignedDate() {
         return assignedDate;
     }
 
-    public void setAssignedDate(String assignedDate) {
+    public void setAssignedDate(LocalDate assignedDate) {
         this.assignedDate = assignedDate;
     }
 
@@ -161,5 +160,13 @@ public class Issue {
 
     public void setSolution(String solution) {
         this.solution = solution;
+    }
+
+    public GeneralType getGeneralType() {
+        return generalType;
+    }
+
+    public void setGeneralType(GeneralType generalType) {
+        this.generalType = generalType;
     }
 }
