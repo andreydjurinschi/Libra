@@ -1,29 +1,32 @@
 package org.cedacri.spring.cedintlibra.dto_s.user;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import org.cedacri.spring.cedintlibra.entity.User;
+import jakarta.validation.constraints.Size;
 
-/**
- * create dto for {@link User}
- */
-public class UserCreateDto {
-    @NotBlank(message = "name is required")
+public class UserUpdateDto {
+
+    @Size(min = 2, max = 50, message = "name must contain 2 - 50 letters")
     private String name;
-    @NotBlank(message = "email is required")
+
     @Email
     private String email;
-    @NotBlank(message = "login is required")
+
+    @Size(min = 4, max = 15, message = "login must contain 4 - 15 letters")
     private String login;
-    @NotBlank(message = "password is required")
+
     private String password;
-    @NotBlank(message = "telephone is required")
+
     private String telephone;
-    @NotNull
+
     private Long userTypeId;
 
-    public UserCreateDto() {
+    public UserUpdateDto(String name, String email, String login, String password, String telephone, Long userTypeId) {
+        this.name = name;
+        this.email = email;
+        this.login = login;
+        this.password = password;
+        this.telephone = telephone;
+        this.userTypeId = userTypeId;
     }
 
     public String getName() {

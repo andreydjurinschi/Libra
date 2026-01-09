@@ -1,43 +1,21 @@
-package org.cedacri.spring.cedintlibra.entity;
+package org.cedacri.spring.cedintlibra.dto_s.user;
 
-import jakarta.persistence.*;
 
-@Entity
-@Table(name = "users")
-public class User {
+import org.cedacri.spring.cedintlibra.entity.UserType;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false)
+public class UserBaseDto {
     private String name;
-    @Column(nullable = false)
     private String email;
-    @Column(nullable = false)
     private String login;
-    @Column(nullable = false)
-    private String password;
-    @Column(nullable = false)
     private String telephone;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_user_type", nullable = false)
     private UserType userType;
 
-    public User() {}
-
-    public User(String name, String email, String login, String password, String telephone, UserType userType) {
+    public UserBaseDto(String name, String email, String login, String telephone, UserType userType) {
         this.name = name;
         this.email = email;
         this.login = login;
-        this.password = password;
         this.telephone = telephone;
         this.userType = userType;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getName() {
@@ -64,14 +42,6 @@ public class User {
         this.login = login;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getTelephone() {
         return telephone;
     }
@@ -88,4 +58,3 @@ public class User {
         this.userType = userType;
     }
 }
-

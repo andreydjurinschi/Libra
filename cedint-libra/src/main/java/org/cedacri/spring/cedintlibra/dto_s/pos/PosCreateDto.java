@@ -8,6 +8,7 @@ import org.cedacri.spring.cedintlibra.entity.util_models.WeekDays;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Set;
 
 public class PosCreateDto {
     @NotBlank(message = "pos name cannot be empty")
@@ -39,8 +40,7 @@ public class PosCreateDto {
     @FutureOrPresent
     @NotNull
     private LocalTime afternoonClosing;
-    @NotNull
-    private WeekDays daysClosed;
+    private Set<WeekDays> daysClosed;
     @NotNull
     private LocalDate insertDate;
 
@@ -143,11 +143,11 @@ public class PosCreateDto {
         this.afternoonClosing = afternoonClosing;
     }
 
-    public WeekDays getDaysClosed() {
+    public Set<WeekDays> getDaysClosed() {
         return daysClosed;
     }
 
-    public void setDaysClosed(WeekDays daysClosed) {
+    public void setDaysClosed(Set<WeekDays> daysClosed) {
         this.daysClosed = daysClosed;
     }
 
