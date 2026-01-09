@@ -1,56 +1,56 @@
-package org.cedacri.spring.cedintlibra.entity;
+package org.cedacri.spring.cedintlibra.dto_s.pos;
 
-import jakarta.persistence.*;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
+import org.cedacri.spring.cedintlibra.entity.City;
+import org.cedacri.spring.cedintlibra.entity.ConnectionType;
 import org.cedacri.spring.cedintlibra.entity.util_models.WeekDays;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@Entity
-@Table(name = "pos")
-public class Pos {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false)
+public class PosCreateDto {
+    @NotBlank(message = "pos name cannot be empty")
     private String name;
-    @Column(nullable = false)
+    @NotBlank(message = "phone cannot be empty")
     private String telephone;
-    @Column(nullable = false)
+    @NotBlank(message = "cellphone cannot be empty")
     private String cellphone;
-    @Column(nullable = false)
+    @NotBlank(message = "address cannot be empty")
     private String address;
-    @Column(nullable = false)
+    @NotBlank(message = "model cannot be empty")
     private String model;
-    @Column(nullable = false)
+    @NotBlank(message = "brand cannot be empty")
     private String brand;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_city", nullable = false)
-    private City city;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_conn_type", nullable = false)
+    @NotNull(message = "coty is required")
+    private Long city;
+    @NotNull(message = "connection type is required")
     private ConnectionType connectionType;
 
-    @Column(nullable = false)
+    @NotNull
+    @PastOrPresent
     private LocalTime morningOpening;
-    @Column(nullable = false)
+    @NotNull
+    @FutureOrPresent
+    @NotNull
     private LocalTime morningClosing;
-    @Column(nullable = false)
+    @FutureOrPresent
+    @NotNull
     private LocalTime afternoonOpening;
-    @Column(nullable = false)
+    @FutureOrPresent
+    @NotNull
     private LocalTime afternoonClosing;
-    @Enumerated(EnumType.STRING)
+    @NotNull
     private WeekDays daysClosed;
+    @NotNull
     private LocalDate insertDate;
 
-    public Pos() {}
-
-    public Long getId() {
-        return id;
+    public PosCreateDto() {
     }
 
     public String getName() {
@@ -101,11 +101,11 @@ public class Pos {
         this.brand = brand;
     }
 
-    public City getCity() {
+    public Long getCity() {
         return city;
     }
 
-    public void setCity(City city) {
+    public void setCity(Long city) {
         this.city = city;
     }
 

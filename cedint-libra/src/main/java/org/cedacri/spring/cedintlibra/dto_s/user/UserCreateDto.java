@@ -1,34 +1,26 @@
-package org.cedacri.spring.cedintlibra.entity;
+package org.cedacri.spring.cedintlibra.dto_s.user;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import org.cedacri.spring.cedintlibra.entity.User;
 
-@Entity
-@Table(name = "users")
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false)
+/**
+ * create dto for {@link User}
+ */
+public class UserCreateDto {
+    @NotBlank(message = "name is required")
     private String name;
-    @Column(nullable = false)
+    @NotBlank(message = "email is required")
+    @Email
     private String email;
-    @Column(nullable = false)
+    @NotBlank(message = "login is required")
     private String login;
-    @Column(nullable = false)
+    @NotBlank(message = "password is required")
     private String password;
-    @Column(nullable = false)
+    @NotBlank(message = "telephone is required")
     private String telephone;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_user_type", nullable = false)
-    private UserType userType;
-
-    public User() {}
-
-    public Long getId() {
-        return id;
+    public UserCreateDto() {
     }
 
     public String getName() {
@@ -70,13 +62,4 @@ public class User {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
-
-    public UserType getUserType() {
-        return userType;
-    }
-
-    public void setUserType(UserType userType) {
-        this.userType = userType;
-    }
 }
-

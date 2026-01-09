@@ -1,5 +1,6 @@
 package org.cedacri.spring.cedintlibra.entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -22,7 +23,10 @@ public class Log {
     private User user;
 
     private String action;
+
     private String notes;
+
+    @Column(nullable = false)
     private LocalDate insertDate;
 
     public Log() {}

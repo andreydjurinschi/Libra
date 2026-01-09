@@ -1,34 +1,30 @@
-package org.cedacri.spring.cedintlibra.entity;
+package org.cedacri.spring.cedintlibra.dto_s.issue_type;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import org.cedacri.spring.cedintlibra.entity.IssueType;
 import org.cedacri.spring.cedintlibra.entity.util_models.GeneralType;
 import org.cedacri.spring.cedintlibra.entity.util_models.IssueLevel;
 
 import java.time.LocalDate;
 
+/**
+ * create / update dto for {@link IssueType}
+ */
+public class IssueTypeCreateUpdateDto {
 
-@Entity
-@Table(name = "issue_types")
-public class IssueType {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Enumerated(EnumType.STRING)
+    @NotNull
     private IssueLevel issueLevel;
 
-    @Enumerated(EnumType.STRING)
+    @NotNull
     private GeneralType generalIssueType;
 
+    @NotBlank(message = "issue type name is required")
     private String name;
-
+    // can be null
     private LocalDate insertDate;
 
-    public IssueType() {}
-
-    public Long getId() {
-        return id;
+    public IssueTypeCreateUpdateDto() {
     }
 
     public IssueLevel getIssueLevel() {
@@ -63,4 +59,3 @@ public class IssueType {
         this.insertDate = insertDate;
     }
 }
-
