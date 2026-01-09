@@ -5,6 +5,8 @@ import org.cedacri.spring.cedintlibra.entity.util_models.WeekDays;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "pos")
@@ -44,10 +46,27 @@ public class Pos {
     @Column(nullable = false)
     private LocalTime afternoonClosing;
     @Enumerated(EnumType.STRING)
-    private WeekDays daysClosed;
+    private Set<WeekDays> daysClosed = new HashSet<>();
     private LocalDate insertDate;
 
     public Pos() {}
+
+    public Pos(String name, String telephone, String cellphone, String address, String model, String brand, City city, ConnectionType connectionType, LocalTime morningOpening, LocalTime morningClosing, LocalTime afternoonOpening, LocalTime afternoonClosing, Set<WeekDays> daysClosed, LocalDate insertDate) {
+        this.name = name;
+        this.telephone = telephone;
+        this.cellphone = cellphone;
+        this.address = address;
+        this.model = model;
+        this.brand = brand;
+        this.city = city;
+        this.connectionType = connectionType;
+        this.morningOpening = morningOpening;
+        this.morningClosing = morningClosing;
+        this.afternoonOpening = afternoonOpening;
+        this.afternoonClosing = afternoonClosing;
+        this.daysClosed = daysClosed;
+        this.insertDate = insertDate;
+    }
 
     public Long getId() {
         return id;
@@ -149,11 +168,11 @@ public class Pos {
         this.afternoonClosing = afternoonClosing;
     }
 
-    public WeekDays getDaysClosed() {
+    public Set<WeekDays> getDaysClosed() {
         return daysClosed;
     }
 
-    public void setDaysClosed(WeekDays daysClosed) {
+    public void setDaysClosed(Set<WeekDays> daysClosed) {
         this.daysClosed = daysClosed;
     }
 
