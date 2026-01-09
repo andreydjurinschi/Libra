@@ -1,7 +1,6 @@
 package org.cedacri.spring.cedintlibra.dto_s.issue;
 
 import jakarta.validation.constraints.*;
-import org.cedacri.spring.cedintlibra.entity.User;
 import org.cedacri.spring.cedintlibra.entity.util_models.GeneralType;
 
 import java.time.LocalDate;
@@ -11,8 +10,7 @@ public class IssueCreateDto {
     @NotNull(message = "pos is required")
     private Long posId;
 
-    @NotNull(message = "user is required")
-    private User userCreated;
+    private Long userCreatedId;
 
     @NotNull(message = "type is required")
     private Long type;
@@ -65,12 +63,12 @@ public class IssueCreateDto {
         this.posId = posId;
     }
 
-    public User getUserCreated() {
-        return userCreated;
+    public Long getUserCreatedId() {
+        return userCreatedId;
     }
 
-    public void setUserCreated(User userCreated) {
-        this.userCreated = userCreated;
+    public void setUserCreatedId(Long userCreatedId) {
+        this.userCreatedId = userCreatedId;
     }
 
     public Long getType() {

@@ -1,14 +1,9 @@
 package org.cedacri.spring.cedintlibra.dto_s.pos;
 
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
-import org.cedacri.spring.cedintlibra.entity.City;
-import org.cedacri.spring.cedintlibra.entity.ConnectionType;
 import org.cedacri.spring.cedintlibra.entity.util_models.WeekDays;
 
 import java.time.LocalDate;
@@ -29,8 +24,7 @@ public class PosCreateDto {
     private String brand;
     @NotNull(message = "coty is required")
     private Long city;
-    @NotNull(message = "connection type is required")
-    private ConnectionType connectionType;
+    private Long connectionTypeId;
 
     @NotNull
     @PastOrPresent
@@ -109,12 +103,12 @@ public class PosCreateDto {
         this.city = city;
     }
 
-    public ConnectionType getConnectionType() {
-        return connectionType;
+    public Long getConnectionTypeId() {
+        return connectionTypeId;
     }
 
-    public void setConnectionType(ConnectionType connectionType) {
-        this.connectionType = connectionType;
+    public void setConnectionTypeId(Long connectionTypeId) {
+        this.connectionTypeId = connectionTypeId;
     }
 
     public LocalTime getMorningOpening() {
