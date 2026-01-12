@@ -45,7 +45,14 @@ public class Pos {
     private LocalTime afternoonOpening;
     @Column(nullable = false)
     private LocalTime afternoonClosing;
+
+    @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
+    @CollectionTable(
+            name = "pos_days_closed",
+            joinColumns = @JoinColumn(name = "pos_id")
+    )
+    @Column(name = "day_closed", nullable = false)
     private Set<WeekDays> daysClosed = new HashSet<>();
     private LocalDate insertDate;
 
