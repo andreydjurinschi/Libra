@@ -4,6 +4,8 @@ import jakarta.transaction.Transactional;
 import org.cedacri.spring.cedintlibra.dto_s.user.UserBaseDto;
 import org.cedacri.spring.cedintlibra.dto_s.user.UserCreateDto;
 import org.cedacri.spring.cedintlibra.dto_s.user.UserUpdateDto;
+import org.cedacri.spring.cedintlibra.dto_s.user.UserWithTypeDto;
+import org.cedacri.spring.cedintlibra.dto_s.user_type.UserTypeDto;
 import org.cedacri.spring.cedintlibra.entity.User;
 import org.cedacri.spring.cedintlibra.entity.UserType;
 import org.cedacri.spring.cedintlibra.mappers.UserMapper;
@@ -37,7 +39,10 @@ public class UserService {
 
     @Transactional
     public void createUser(UserCreateDto dto){
+        UserType userType = userTypeRepository.findById(dto.getUserTypeId())
+                .orElseThrow(() -> new NoSuchElementException("user type does not exist"));
         User user = UserMapper.mapCreateDtoToEntity(dto);
+        user.setUserType(userType);
         user.setPassword(PasswordUtil.hash(dto.getPassword()));
         userRepository.save(user);
     }
@@ -68,6 +73,12 @@ public class UserService {
             user.setUserType(userType);
         }
     }
+
+    public UserWithTypeDto getUserWithType(Long id){
+        User user = getUser(id);
+        return UserMapper.mapToUserWithTypeDto(user);
+    }
+
 
     //TODO: cascade delete logic
     @Transactional

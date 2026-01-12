@@ -12,10 +12,6 @@ public class PosBaseDto {
     private String address;
     private String model;
     private String brand;
-    //TODO: to place City dto here when it would be ready
-    //private CityDto dto;
-    //TODO: to place ConnectionType dto here when it would be ready
-    //private ConnectionTypeDto  dto;
     private Set<WeekDays> daysClosed;
     private LocalDate insertDate;
     public PosBaseDto(String name, String telephone, String cellphone, String address, String model, String brand, Set<WeekDays> daysClosed, LocalDate insertDate) {

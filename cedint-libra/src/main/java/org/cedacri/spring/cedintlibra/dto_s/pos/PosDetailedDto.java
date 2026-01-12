@@ -1,65 +1,30 @@
-package org.cedacri.spring.cedintlibra.entity;
+package org.cedacri.spring.cedintlibra.dto_s.pos;
 
-import jakarta.persistence.*;
+import org.cedacri.spring.cedintlibra.dto_s.city.CityDto;
+import org.cedacri.spring.cedintlibra.dto_s.connection_type.ConnectionTypeDto;
 import org.cedacri.spring.cedintlibra.entity.util_models.WeekDays;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table(name = "pos")
-public class Pos {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false)
+public class PosDetailedDto {
     private String name;
-    @Column(nullable = false)
     private String telephone;
-    @Column(nullable = false)
     private String cellphone;
-    @Column(nullable = false)
     private String address;
-    @Column(nullable = false)
     private String model;
-    @Column(nullable = false)
     private String brand;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_city", nullable = false)
-    private City city;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_conn_type", nullable = false)
-    private ConnectionType connectionType;
-
-    @Column(nullable = false)
+    private CityDto city;
+    private ConnectionTypeDto connectionType;
     private LocalTime morningOpening;
-    @Column(nullable = false)
     private LocalTime morningClosing;
-    @Column(nullable = false)
     private LocalTime afternoonOpening;
-    @Column(nullable = false)
     private LocalTime afternoonClosing;
-
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Enumerated(EnumType.STRING)
-    @CollectionTable(
-            name = "pos_days_closed",
-            joinColumns = @JoinColumn(name = "pos_id")
-    )
-    @Column(name = "day_closed", nullable = false)
-    private Set<WeekDays> daysClosed = new HashSet<>();
-
+    private Set<WeekDays> daysClosed;
     private LocalDate insertDate;
 
-    public Pos() {}
-
-    public Pos(String name, String telephone, String cellphone, String address, String model, String brand, City city, ConnectionType connectionType, LocalTime morningOpening, LocalTime morningClosing, LocalTime afternoonOpening, LocalTime afternoonClosing, Set<WeekDays> daysClosed, LocalDate insertDate) {
+    public PosDetailedDto(String name, String telephone, String cellphone, String address, String model, String brand, CityDto city, ConnectionTypeDto connectionType, LocalTime morningOpening, LocalTime morningClosing, LocalTime afternoonOpening, LocalTime afternoonClosing, Set<WeekDays> daysClosed, LocalDate insertDate) {
         this.name = name;
         this.telephone = telephone;
         this.cellphone = cellphone;
@@ -74,10 +39,6 @@ public class Pos {
         this.afternoonClosing = afternoonClosing;
         this.daysClosed = daysClosed;
         this.insertDate = insertDate;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getName() {
@@ -128,19 +89,19 @@ public class Pos {
         this.brand = brand;
     }
 
-    public City getCity() {
+    public CityDto getCity() {
         return city;
     }
 
-    public void setCity(City city) {
+    public void setCity(CityDto city) {
         this.city = city;
     }
 
-    public ConnectionType getConnectionType() {
+    public ConnectionTypeDto getConnectionType() {
         return connectionType;
     }
 
-    public void setConnectionType(ConnectionType connectionType) {
+    public void setConnectionType(ConnectionTypeDto connectionType) {
         this.connectionType = connectionType;
     }
 

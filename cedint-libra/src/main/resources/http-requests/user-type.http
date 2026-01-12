@@ -1,0 +1,6 @@
+
+### get all user types
+GET http://localhost:8080/libra/user-types/all
+
+### get user type by id / id - optional
+GET http://localhost:8080/libra/user-types/1

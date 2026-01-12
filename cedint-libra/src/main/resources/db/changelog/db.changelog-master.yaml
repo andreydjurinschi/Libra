@@ -33,3 +33,24 @@ databaseChangeLog:
         - sqlFile:
             path: changeset/004-insert-into-STATUSES-table.sql
             relativeToChangelogFile: true
+  - changeSet:
+      id: 005
+      author: andrei
+      changes:
+        - sqlFile:
+            path: changeset/005-insert-data-into-users-table.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 006
+      author: andrei
+      changes:
+        - sqlFile:
+            path: changeset/006-insert-into-pos-table.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: 007
+      author: andrei
+      changes:
+        - sqlFile:
+            path: changeset/007-insert-into-pos-days-closed.sql
+            relativeToChangelogFile: true
