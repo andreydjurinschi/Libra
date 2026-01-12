@@ -1,0 +1,5 @@
+### get all statuses
+GET http://localhost:8080/libra/statuses/all
+
+### get status by id / id - optional
+GET http://localhost:8080/libra/statuses/1

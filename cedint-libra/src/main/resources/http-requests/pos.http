@@ -1,0 +1,46 @@
+### get all poses
+GET http://localhost:8080/libra/pos/all
+
+### get pos full data by id / id - optional
+GET http://localhost:8080/libra/pos/info/1
+
+### create pos
+POST http://localhost:8080/libra/pos/create
+Content-Type:
+{
+  "name": "POS CREATED BY POST REQUEST",
+  "telephone": "TEST NUMBER",
+  "cellphone": "TEST CELLNUMBER",
+  "address": "TEST ADRESS",
+  "model": "TEST MODEL",
+  "brand": "apple ",
+  "city": 3,
+  "connectionTypeId": 3,
+  "morningOpening": "08:00",
+  "morningClosing": "12:00",
+  "afternoonOpening": "14:00",
+  "afternoonClosing": "18:00",
+  "daysClosed": ["SUN", "SAT", "MON"],
+  "insertDate": "2026-01-12"
+}
+
+### update pos entity by id / id - optional
+PUT http://localhost:8080/libra/pos/update/7
+Content-Type:
+{
+  "name": "POS UPDATED BY POST REQUEST",
+  "telephone": "TEST NUMBER UPD",
+  "cellphone": "TEST CELLNUMBER UPD",
+  "address": "TEST ADRESS UPD",
+  "model": "TEST MODEL UPD",
+  "brand": "apple UPD",
+  "city": 2,
+  "connectionTypeId": 1,
+  "morningOpening": "09:00",
+  "morningClosing": "13:00",
+  "afternoonOpening": "14:30",
+  "afternoonClosing": "17:00",
+  "daysClosed": ["SUN", "MON"],
+  "insertDate": "2026-01-11"
+}
+

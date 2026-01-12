@@ -1,9 +1,7 @@
 package org.cedacri.spring.cedintlibra.dto_s.pos;
 
-import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PastOrPresent;
 import org.cedacri.spring.cedintlibra.entity.util_models.WeekDays;
 
 import java.time.LocalDate;
@@ -28,21 +26,37 @@ public class PosCreateDto {
     private Long connectionTypeId;
 
     @NotNull
-    @PastOrPresent
     private LocalTime morningOpening;
     @NotNull
-    @FutureOrPresent
+
     @NotNull
     private LocalTime morningClosing;
-    @FutureOrPresent
+
     @NotNull
     private LocalTime afternoonOpening;
-    @FutureOrPresent
+
     @NotNull
     private LocalTime afternoonClosing;
     private Set<WeekDays> daysClosed;
     @NotNull
     private LocalDate insertDate;
+
+    public PosCreateDto(String name, String telephone, String cellphone, String address, String model, String brand, Long city, Long connectionTypeId, LocalTime morningOpening, LocalTime morningClosing, LocalTime afternoonOpening, LocalTime afternoonClosing, Set<WeekDays> daysClosed, LocalDate insertDate) {
+        this.name = name;
+        this.telephone = telephone;
+        this.cellphone = cellphone;
+        this.address = address;
+        this.model = model;
+        this.brand = brand;
+        this.city = city;
+        this.connectionTypeId = connectionTypeId;
+        this.morningOpening = morningOpening;
+        this.morningClosing = morningClosing;
+        this.afternoonOpening = afternoonOpening;
+        this.afternoonClosing = afternoonClosing;
+        this.daysClosed = daysClosed;
+        this.insertDate = insertDate;
+    }
 
     public PosCreateDto() {
     }

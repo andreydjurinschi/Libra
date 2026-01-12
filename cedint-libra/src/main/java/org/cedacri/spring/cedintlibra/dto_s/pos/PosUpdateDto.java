@@ -1,65 +1,37 @@
-package org.cedacri.spring.cedintlibra.entity;
+package org.cedacri.spring.cedintlibra.dto_s.pos;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.PastOrPresent;
 import org.cedacri.spring.cedintlibra.entity.util_models.WeekDays;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table(name = "pos")
-public class Pos {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false)
+public class PosUpdateDto {
     private String name;
-    @Column(nullable = false)
     private String telephone;
-    @Column(nullable = false)
     private String cellphone;
-    @Column(nullable = false)
     private String address;
-    @Column(nullable = false)
     private String model;
-    @Column(nullable = false)
     private String brand;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_city", nullable = false)
-    private City city;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_conn_type", nullable = false)
-    private ConnectionType connectionType;
-
-    @Column(nullable = false)
+    private Long city;
+    private Long connectionTypeId;
+    @PastOrPresent
     private LocalTime morningOpening;
-    @Column(nullable = false)
+    @FutureOrPresent
     private LocalTime morningClosing;
-    @Column(nullable = false)
+    @FutureOrPresent
     private LocalTime afternoonOpening;
-    @Column(nullable = false)
+    @FutureOrPresent
     private LocalTime afternoonClosing;
-
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Enumerated(EnumType.STRING)
-    @CollectionTable(
-            name = "pos_days_closed",
-            joinColumns = @JoinColumn(name = "pos_id")
-    )
-    @Column(name = "day_closed", nullable = false)
-    private Set<WeekDays> daysClosed = new HashSet<>();
-
+    private Set<WeekDays> daysClosed;
     private LocalDate insertDate;
 
-    public Pos() {}
+    public PosUpdateDto() {
+    }
 
-    public Pos(String name, String telephone, String cellphone, String address, String model, String brand, City city, ConnectionType connectionType, LocalTime morningOpening, LocalTime morningClosing, LocalTime afternoonOpening, LocalTime afternoonClosing, Set<WeekDays> daysClosed, LocalDate insertDate) {
+    public PosUpdateDto(String name, String telephone, String cellphone, String address, String model, String brand, Long city, Long connectionTypeId, LocalTime morningOpening, LocalTime morningClosing, LocalTime afternoonOpening, LocalTime afternoonClosing, Set<WeekDays> daysClosed, LocalDate insertDate) {
         this.name = name;
         this.telephone = telephone;
         this.cellphone = cellphone;
@@ -67,17 +39,13 @@ public class Pos {
         this.model = model;
         this.brand = brand;
         this.city = city;
-        this.connectionType = connectionType;
+        this.connectionTypeId = connectionTypeId;
         this.morningOpening = morningOpening;
         this.morningClosing = morningClosing;
         this.afternoonOpening = afternoonOpening;
         this.afternoonClosing = afternoonClosing;
         this.daysClosed = daysClosed;
         this.insertDate = insertDate;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getName() {
@@ -128,20 +96,20 @@ public class Pos {
         this.brand = brand;
     }
 
-    public City getCity() {
+    public Long getCity() {
         return city;
     }
 
-    public void setCity(City city) {
+    public void setCity(Long city) {
         this.city = city;
     }
 
-    public ConnectionType getConnectionType() {
-        return connectionType;
+    public Long getConnectionTypeId() {
+        return connectionTypeId;
     }
 
-    public void setConnectionType(ConnectionType connectionType) {
-        this.connectionType = connectionType;
+    public void setConnectionTypeId(Long connectionTypeId) {
+        this.connectionTypeId = connectionTypeId;
     }
 
     public LocalTime getMorningOpening() {

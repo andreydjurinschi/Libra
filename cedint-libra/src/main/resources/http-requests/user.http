@@ -1,0 +1,32 @@
+### user get by id method / id - optional
+GET http://localhost:8080/libra/users/1
+
+### user get all method
+GET http://localhost:8080/libra/users/all
+
+### user ger with type method / id - optional
+GET http://localhost:8080/libra/users/1/type
+
+### user update method / content type / id - optional
+PUT http://localhost:8080/libra/users/update/1
+Content-Type:
+{
+    "name": "Spider Man",
+    "email": "spiderman@gmail.com",
+    "userTypeId": 1
+}
+
+### user post method / content type - optional
+POST http://localhost:8080/libra/users/create
+Content-Type:
+{
+    "name": "Grogorii Cosca",
+    "email": "grisha@gmail.com",
+    "login": "grishunia1990_PRO",
+    "password": "pass2004",
+    "telephone": "060111111",
+    "userTypeId": 1
+}
+
+### user delete method (ID - optional)
+DELETE http://localhost:8080/libra/users/delete/7

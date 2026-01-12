@@ -3,6 +3,8 @@ package org.cedacri.spring.cedintlibra.services.pos;
 import jakarta.transaction.Transactional;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosBaseDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosCreateDto;
+import org.cedacri.spring.cedintlibra.dto_s.pos.PosDetailedDto;
+import org.cedacri.spring.cedintlibra.entity.util_models.WeekDays;
 import org.cedacri.spring.cedintlibra.mappers.PosMapper;
 import org.cedacri.spring.cedintlibra.entity.City;
 import org.cedacri.spring.cedintlibra.entity.ConnectionType;
@@ -11,9 +13,13 @@ import org.cedacri.spring.cedintlibra.repositories.CityRepository;
 import org.cedacri.spring.cedintlibra.repositories.ConnectionTypeRepository;
 import org.cedacri.spring.cedintlibra.repositories.PosRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Set;
 
 @Service
 public class PosService {
@@ -46,34 +52,91 @@ public class PosService {
         pos.setCity(city);
         ConnectionType connectionType = connectionTypeRepository.findById(dto.getConnectionTypeId())
                 .orElseThrow(() -> new NoSuchElementException("Connection type not found"));
+        pos.setConnectionType(connectionType);
         posRepository.save(pos);
     }
 
 
     @Transactional
     public void updatePos(Long id, PosCreateDto dto) {
+
+        if (dto == null) {
+            throw new IllegalArgumentException("dto cannot be null");
+        }
+
         Pos pos = getPos(id);
-        pos.setName(dto.getName());
-        pos.setTelephone(dto.getTelephone());
-        pos.setCellphone(dto.getCellphone());
-        pos.setAddress(dto.getAddress());
-        pos.setModel(dto.getModel());
-        pos.setBrand(dto.getBrand());
+
+        if (!StringUtils.hasText(dto.getName())) {
+            throw new IllegalArgumentException("pos name cannot be empty");
+        }
+        pos.setName(dto.getName().trim());
+
+        if (!StringUtils.hasText(dto.getTelephone())) {
+            throw new IllegalArgumentException("phone cannot be empty");
+        }
+        pos.setTelephone(dto.getTelephone().trim());
+
+        if (!StringUtils.hasText(dto.getCellphone())) {
+            throw new IllegalArgumentException("cellphone cannot be empty");
+        }
+        pos.setCellphone(dto.getCellphone().trim());
+
+        if (!StringUtils.hasText(dto.getAddress())) {
+            throw new IllegalArgumentException("address cannot be empty");
+        }
+        pos.setAddress(dto.getAddress().trim());
+
+        if (!StringUtils.hasText(dto.getModel())) {
+            throw new IllegalArgumentException("model cannot be empty");
+        }
+        pos.setModel(dto.getModel().trim());
+
+        if (!StringUtils.hasText(dto.getBrand())) {
+            throw new IllegalArgumentException("brand cannot be empty");
+        }
+        pos.setBrand(dto.getBrand().trim());
+
+        if (dto.getCity() == null) {
+            throw new IllegalArgumentException("city is required");
+        }
 
         City city = cityRepository.findById(dto.getCity())
                 .orElseThrow(() -> new NoSuchElementException("City not found"));
         pos.setCity(city);
 
-        ConnectionType connectionType = connectionTypeRepository.findById(dto.getConnectionTypeId())
+        if (dto.getConnectionTypeId() != null) {
+            ConnectionType connectionType = connectionTypeRepository.findById(dto.getConnectionTypeId())
                     .orElseThrow(() -> new NoSuchElementException("Connection type not found"));
+            pos.setConnectionType(connectionType);
+        } else {
+            pos.setConnectionType(null);
+        }
 
-        pos.setConnectionType(connectionType);
-        pos.setMorningOpening(dto.getMorningOpening());
-        pos.setMorningClosing(dto.getMorningClosing());
-        pos.setAfternoonOpening(dto.getAfternoonOpening());
-        pos.setAfternoonClosing(dto.getAfternoonClosing());
-        pos.setDaysClosed(dto.getDaysClosed());
+        LocalTime morningOpening = dto.getMorningOpening();
+        LocalTime morningClosing = dto.getMorningClosing();
+        LocalTime afternoonOpening = dto.getAfternoonOpening();
+        LocalTime afternoonClosing = dto.getAfternoonClosing();
+
+        if (!morningOpening.isBefore(morningClosing)) {
+            throw new IllegalArgumentException("morning opening must be before morning closing");
+        }
+        if (!afternoonOpening.isBefore(afternoonClosing)) {
+            throw new IllegalArgumentException("afternoon opening must be before afternoon closing");
+        }
+        pos.setMorningOpening(morningOpening);
+        pos.setMorningClosing(morningClosing);
+        pos.setAfternoonOpening(afternoonOpening);
+        pos.setAfternoonClosing(afternoonClosing);
+
+        Set<WeekDays> daysClosed = dto.getDaysClosed();
+        pos.setDaysClosed(Objects.requireNonNullElse(daysClosed, Set.of()));
+
+
+        if (dto.getInsertDate() == null) {
+            throw new IllegalArgumentException("insertDate is required");
+        }
         pos.setInsertDate(dto.getInsertDate());
+
 
         posRepository.save(pos);
     }
@@ -83,6 +146,13 @@ public class PosService {
         Pos pos = getPos(id);
         posRepository.delete(pos);
     }
+
+    public PosDetailedDto getFullPosData(Long id){
+        Pos pos = getPos(id);
+
+        return PosMapper.mapToDetailedDto(pos);
+    }
+
 
     private Pos getPos(Long id) {
         return posRepository.findById(id)

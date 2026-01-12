@@ -1,18 +1,20 @@
 package org.cedacri.spring.cedintlibra.dto_s.user;
 
-public class UserBaseDto {
+import org.cedacri.spring.cedintlibra.dto_s.user_type.UserTypeDto;
+
+public class UserWithTypeDto {
     private String name;
     private String email;
     private String login;
     private String telephone;
+    private UserTypeDto userType;
 
-
-    public UserBaseDto(String name, String email, String login, String telephone) {
+    public UserWithTypeDto(String name, String email, String login, String telephone, UserTypeDto userType) {
         this.name = name;
         this.email = email;
         this.login = login;
         this.telephone = telephone;
-
+        this.userType = userType;
     }
 
     public String getName() {
@@ -45,5 +47,13 @@ public class UserBaseDto {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public UserTypeDto getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserTypeDto userType) {
+        this.userType = userType;
     }
 }

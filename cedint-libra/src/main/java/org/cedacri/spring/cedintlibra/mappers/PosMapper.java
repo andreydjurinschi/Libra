@@ -1,7 +1,10 @@
 package org.cedacri.spring.cedintlibra.mappers;
 
+import org.cedacri.spring.cedintlibra.dto_s.city.CityDto;
+import org.cedacri.spring.cedintlibra.dto_s.connection_type.ConnectionTypeDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosBaseDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosCreateDto;
+import org.cedacri.spring.cedintlibra.dto_s.pos.PosDetailedDto;
 import org.cedacri.spring.cedintlibra.entity.Pos;
 
 public class PosMapper {
@@ -19,9 +22,6 @@ public class PosMapper {
                 );
     }
 
-    // TODO: replace null on city field
-    //  with City entity, replace ConnectionType with ConnectionEntity
-    //  when it would be ready
     public static Pos mapCreatePosDtoToEntity(PosCreateDto dto){
         return new Pos(
                 dto.getName(),
@@ -30,14 +30,37 @@ public class PosMapper {
                 dto.getAddress(),
                 dto.getModel(),
                 dto.getBrand(),
-                null /*dto.getCity()*/,
-                null /*dto.getConnectionTypeId()*/,
+                null,
+                null,
                 dto.getMorningOpening(),
                 dto.getMorningClosing(),
                 dto.getAfternoonOpening(),
                 dto.getAfternoonClosing(),
                 dto.getDaysClosed(),
                 dto.getInsertDate()
+        );
+    }
+
+    public static PosDetailedDto mapToDetailedDto(Pos pos) {
+
+        CityDto cityDto = CityMapper.mapToDto(pos.getCity());
+        ConnectionTypeDto connectionTypeDto = ConnectionTypeMapper.mapToDto(pos.getConnectionType());
+
+        return new PosDetailedDto(
+            pos.getName(),
+                pos.getTelephone(),
+                pos.getCellphone(),
+                pos.getAddress(),
+                pos.getModel(),
+                pos.getBrand(),
+                cityDto,
+                connectionTypeDto,
+                pos.getMorningOpening(),
+                pos.getMorningClosing(),
+                pos.getAfternoonOpening(),
+                pos.getAfternoonClosing(),
+                pos.getDaysClosed(),
+                pos.getInsertDate()
         );
     }
 }

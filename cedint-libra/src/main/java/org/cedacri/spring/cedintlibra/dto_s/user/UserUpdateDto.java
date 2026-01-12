@@ -1,6 +1,7 @@
 package org.cedacri.spring.cedintlibra.dto_s.user;
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class UserUpdateDto {
@@ -14,10 +15,12 @@ public class UserUpdateDto {
     @Size(min = 4, max = 15, message = "login must contain 4 - 15 letters")
     private String login;
 
+    @Size(min = 4, max = 15, message = "password must contains at least 4 chars")
     private String password;
 
     private String telephone;
 
+    @NotNull
     private Long userTypeId;
 
     public UserUpdateDto(String name, String email, String login, String password, String telephone, Long userTypeId) {
