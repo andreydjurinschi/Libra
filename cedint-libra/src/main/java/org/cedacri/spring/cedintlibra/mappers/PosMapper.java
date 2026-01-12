@@ -1,5 +1,7 @@
-package org.cedacri.spring.cedintlibra.dto_s.pos;
+package org.cedacri.spring.cedintlibra.mappers;
 
+import org.cedacri.spring.cedintlibra.dto_s.pos.PosBaseDto;
+import org.cedacri.spring.cedintlibra.dto_s.pos.PosCreateDto;
 import org.cedacri.spring.cedintlibra.entity.Pos;
 
 public class PosMapper {

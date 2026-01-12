@@ -45,8 +45,7 @@ public class Pos {
     private LocalTime afternoonOpening;
     @Column(nullable = false)
     private LocalTime afternoonClosing;
-    @Enumerated(EnumType.STRING)
-    private Set<WeekDays> daysClosed = new HashSet<>();
+    private WeekDays daysClosed = new HashSet<>();
     private LocalDate insertDate;
 
     public Pos() {}
