@@ -3,7 +3,7 @@ package org.cedacri.spring.cedintlibra.services.pos;
 import jakarta.transaction.Transactional;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosBaseDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosCreateDto;
-import org.cedacri.spring.cedintlibra.dto_s.pos.PosMapper;
+import org.cedacri.spring.cedintlibra.mappers.PosMapper;
 import org.cedacri.spring.cedintlibra.entity.City;
 import org.cedacri.spring.cedintlibra.entity.ConnectionType;
 import org.cedacri.spring.cedintlibra.entity.Pos;
