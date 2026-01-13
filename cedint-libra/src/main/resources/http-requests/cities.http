@@ -1,0 +1,30 @@
+### Get all cities
+GET http://localhost:8080/libra/cities/all
+Accept: application/json
+
+
+### Get city by id
+GET http://localhost:8080/libra/cities/1
+Accept: application/json
+
+
+### Create city
+POST http://localhost:8080/libra/cities/create
+Content-Type: application/json
+
+{
+  "name": "Bucharest"
+}
+
+
+### Update city
+PUT http://localhost:8080/libra/cities/update/1
+Content-Type: application/json
+
+{
+  "name": "Chisinau"
+}
+
+
+### Delete city
+DELETE http://localhost:8080/libra/cities/delete/1

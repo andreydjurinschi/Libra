@@ -1,0 +1,21 @@
+### Get all connection types
+GET http://localhost:8080/libra/connection-types/all
+Accept: application/json
+
+
+### Create connection type
+POST http://localhost:8080/libra/connection-types/create
+Content-Type: application/json
+
+{
+  "connection_type": "FIBER"
+}
+
+
+### Update connection type
+PUT http://localhost:8080/libra/connection-types/update/4
+Content-Type: application/json
+
+{
+  "connection_type": "DSL"
+}

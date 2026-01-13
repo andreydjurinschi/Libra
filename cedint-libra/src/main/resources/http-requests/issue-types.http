@@ -1,0 +1,25 @@
+### Get all issue types
+GET http://localhost:8080/libra/issue-types/all
+Accept: application/json
+
+
+### Create issue type
+POST http://localhost:8080/libra/issue-types/create
+Content-Type: application/json
+
+{
+  "name": "Hardware problem",
+  "issueLevel": "HIGH",
+  "generalIssueType": "HARDWARE_FAILURE"
+}
+
+
+### Update issue type
+PUT http://localhost:8080/libra/issue-types/update/2
+Content-Type: application/json
+
+{
+  "name": "Hardware / POS",
+  "issueLevel": "MEDIUM",
+  "generalIssueType": "HARDWARE_FAILURE"
+}

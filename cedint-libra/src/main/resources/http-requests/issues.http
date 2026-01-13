@@ -1,0 +1,19 @@
+### Get all issues
+GET http://localhost:8080/libra/issues/all
+Accept: application/json
+
+
+### Create issue
+POST http://localhost:8080/libra/issues/create
+Content-Type: application/json
+
+{
+  "posId": 1,
+  "userCreatedId": 1,
+  "type": 1,
+  "priority": 3,
+  "status": 1,
+  "generalType": "HARDWARE_FAILURE",
+  "problemTitle": "POS not starting",
+  "creationDate": "2024-01-10"
+}
