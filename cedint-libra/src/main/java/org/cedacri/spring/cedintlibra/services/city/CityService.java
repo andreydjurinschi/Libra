@@ -1,4 +1,4 @@
-package org.cedacri.spring.cedintlibra.services.city_service;
+package org.cedacri.spring.cedintlibra.services.city;
 
 import org.cedacri.spring.cedintlibra.dto_s.city.CityCreateUpdateDto;
 import org.cedacri.spring.cedintlibra.dto_s.city.CityDto;

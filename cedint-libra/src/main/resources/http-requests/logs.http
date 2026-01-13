@@ -1,0 +1,16 @@
+### Get all logs
+GET http://localhost:8080/libra/logs/all
+Accept: application/json
+
+
+### Create log
+POST http://localhost:8080/libra/logs/create
+Content-Type: application/json
+
+{
+  "issue": 1,
+  "user": 1,
+  "action": "ASSIGNED",
+  "notes": "Assigned to technician",
+  "insertDate": "2024-01-10"
+}
