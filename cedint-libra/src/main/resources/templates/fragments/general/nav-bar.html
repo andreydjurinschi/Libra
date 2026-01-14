@@ -8,25 +8,22 @@
     <title>Document</title>
 </head>
 <body>
-
-</body>
-</html>
-
-
-<nav class="navbar navbar-light bg-light" th:fragment="nav-bar">
+<div class="navbar navbar-light bg-light" th:fragment="navBar">
     <div class="container-fluid">
-        <a href="/home" th:text="#{app.title}" class="navbar-brand fs-3 fw-semibold">Libra</a>
+        <a href="/home" class="navbar-brand fs-3 fw-semibold">Libra</a>
 
         <ul class="nav">
             <li class="nav-item me-3 align-self-center">
-                <span th:text="${userLogin}">guest</span>
+                <span th:text="${userLogin}">guest</span> <!--TODO: print username after authorizing-->
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link d-flex align-items-center">
                     <i class="bi bi-box-arrow-left me-2"></i>
-                    Logout
+                    Logout <!--TODO: Logout logic-->
                 </a>
             </li>
         </ul>
     </div>
-</nav>
+</div>
+</body>
+</html>

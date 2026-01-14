@@ -54,3 +54,10 @@ databaseChangeLog:
         - sqlFile:
             path: changeset/007-insert-into-pos-days-closed.sql
             relativeToChangelogFile: true
+  - changeSet:
+      id: 008
+      author: andrei
+      changes:
+        - sqlFile:
+            path: changeset/008-insert-into-issues-table.sql
+            relativeToChangelogFile: true

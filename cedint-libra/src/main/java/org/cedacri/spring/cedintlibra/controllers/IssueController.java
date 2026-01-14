@@ -4,9 +4,11 @@ import jakarta.validation.Valid;
 import org.cedacri.spring.cedintlibra.dto_s.issue.IssueBaseDto;
 import org.cedacri.spring.cedintlibra.dto_s.issue.IssueCreateDto;
 import org.cedacri.spring.cedintlibra.dto_s.issue.IssueUpdateDto;
+import org.cedacri.spring.cedintlibra.entity.Status;
 import org.cedacri.spring.cedintlibra.services.issue.IssueService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,4 +50,5 @@ public class IssueController {
         issueService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
+
 }
