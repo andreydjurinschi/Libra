@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div class="col-md-4 col-lg-2 bg-light sidebar min-vh-100 py-3"   th:fragment="left-nav-menu">
+    <nav class="nav nav-pills flex-column">
+
+        <a class="nav-link" href="/home">
+            <i class="bi bi-speedometer2 me-2"></i> Dashboard
+        </a>
+
+        <div class="nav-item dropdown">
+            <ul class="nav flex-column">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="posDropdown"
+                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-upc-scan me-2"></i> POS
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="posDropdown">
+                        <li><a class="dropdown-item" href="#">Create POS</a></li> <!--TODO: Create Pos Form-->
+                        <li><a class="dropdown-item" href="/libra/pos">Browse POS</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="nav-item dropdown">
+            <ul class="nav flex-column">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="issueDropdown"
+                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-gear-wide me-2"></i> Issues
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="issueDropdown">
+                        <li><a class="dropdown-item" href="#">Create Issue</a></li> <!--TODO: Create issues from-->
+                        <li><a class="dropdown-item" href="/libra/home">Browse Issues</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="nav-item dropdown">
+            <ul class="nav flex-column">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown"
+                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-people me-2"></i> Users
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="#">Create User</a></li> <!--TODO: Create User form-->
+                        <li><a class="dropdown-item" href="#">Browse Users</a></li> <!--TODO: Browse Users-->
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+</body>
+</html>

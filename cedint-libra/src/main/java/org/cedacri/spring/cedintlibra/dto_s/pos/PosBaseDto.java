@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.Set;
 
 public class PosBaseDto {
+    private Long id;
     private String name;
     private String telephone;
     private String cellphone;
@@ -14,7 +15,9 @@ public class PosBaseDto {
     private String brand;
     private Set<WeekDays> daysClosed;
     private LocalDate insertDate;
-    public PosBaseDto(String name, String telephone, String cellphone, String address, String model, String brand, Set<WeekDays> daysClosed, LocalDate insertDate) {
+
+    public PosBaseDto(Long id, String name, String telephone, String cellphone, String address, String model, String brand, Set<WeekDays> daysClosed, LocalDate insertDate) {
+        this.id = id;
         this.name = name;
         this.telephone = telephone;
         this.cellphone = cellphone;
@@ -87,5 +90,13 @@ public class PosBaseDto {
 
     public void setInsertDate(LocalDate insertDate) {
         this.insertDate = insertDate;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

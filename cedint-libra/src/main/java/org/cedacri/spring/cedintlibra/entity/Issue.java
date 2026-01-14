@@ -18,7 +18,7 @@ public class Issue {
     private Pos pos;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_type", nullable = false)
+    @JoinColumn(name = "id_type") // TODO: return nullable false
     private IssueType type;
 
     @Enumerated(EnumType.STRING)

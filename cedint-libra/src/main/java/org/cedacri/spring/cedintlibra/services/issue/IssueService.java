@@ -107,6 +107,10 @@ public class IssueService {
         return issueRepository.findAll().stream().map(IssueMapper::mapToBaseDto).toList();
     }
 
+    public Integer getIssueCountByStatus(String status){
+        return issueRepository.countIssueByStatus_Status(status);
+    }
+
     public void delete(Long id) {
         issueRepository.delete(getEntity(id));
     }
