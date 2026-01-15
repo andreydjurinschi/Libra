@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create User</title>
+
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+          crossorigin="anonymous">
+
+    <!-- icons -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+<nav th:insert="~{fragments/general/nav-bar ::navBar }"></nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="~{fragments/general/left-menu :: left-nav-menu}"></div>
+
+        <!-- main content column, same as home-page/main-content -->
+        <div class="col-lg-10 py-3">
+            <div class="border rounded-3 p-4">
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2 class="mb-0">Create User</h2>
+                </div>
+
+                <!-- success message after redirect -->
+                <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
+
+                <form th:action="@{/libra/users/create}" th:object="${form}" method="post" class="row g-3">
+
+                    <div class="col-md-6">
+                        <label class="form-label">Name</label>
+                        <input type="text"
+                               th:field="*{name}"
+                               class="form-control"
+                               th:classappend="${#fields.hasErrors('name')} ? ' is-invalid' : ''">
+                        <div class="invalid-feedback" th:errors="*{name}"></div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Email</label>
+                        <input type="email"
+                               th:field="*{email}"
+                               class="form-control"
+                               th:classappend="${#fields.hasErrors('email')} ? ' is-invalid' : ''">
+                        <div class="invalid-feedback" th:errors="*{email}"></div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Login</label>
+                        <input type="text"
+                               th:field="*{login}"
+                               class="form-control"
+                               th:classappend="${#fields.hasErrors('login')} ? ' is-invalid' : ''">
+                        <div class="invalid-feedback" th:errors="*{login}"></div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Telephone</label>
+                        <input type="text"
+                               th:field="*{telephone}"
+                               class="form-control"
+                               th:classappend="${#fields.hasErrors('telephone')} ? ' is-invalid' : ''">
+                        <div class="invalid-feedback" th:errors="*{telephone}"></div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Password</label>
+                        <input type="password"
+                               th:field="*{password}"
+                               class="form-control"
+                               th:classappend="${#fields.hasErrors('password')} ? ' is-invalid' : ''">
+                        <div class="invalid-feedback" th:errors="*{password}"></div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">User Type</label>
+                        <select th:field="*{userTypeId}"
+                                class="form-select"
+                                th:classappend="${#fields.hasErrors('userTypeId')} ? ' is-invalid' : ''">
+                            <option value="" disabled selected>Select type...</option>
+                            <option th:each="t : ${userTypes}"
+                                    th:value="${t.id}"
+                                    th:text="${t.userType}">
+                            </option>
+                        </select>
+                        <div class="invalid-feedback" th:errors="*{userTypeId}"></div>
+                    </div>
+
+                    <div class="col-12 d-flex gap-2 mt-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-person-plus me-1"></i> Create
+                        </button>
+                        <a class="btn btn-secondary" href="/libra/home">
+                            Cancel
+                        </a>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

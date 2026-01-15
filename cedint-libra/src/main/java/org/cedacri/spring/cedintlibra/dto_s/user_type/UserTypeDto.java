@@ -1,17 +1,30 @@
 package org.cedacri.spring.cedintlibra.dto_s.user_type;
 
 public class UserTypeDto {
-    private String name;
 
-    public UserTypeDto(String name) {
-        this.name = name;
+    private Long id;
+    private String userType;
+
+    public UserTypeDto() {}
+
+    public UserTypeDto(Long id, String userType) {
+        this.id = id;
+        this.userType = userType;
     }
 
-    public String getName() {
-        return name;
+    public Long getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 }

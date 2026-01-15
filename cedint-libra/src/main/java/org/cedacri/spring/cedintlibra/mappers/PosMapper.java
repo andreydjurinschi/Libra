@@ -11,6 +11,7 @@ public class PosMapper {
 
     public static PosBaseDto mapToBaseDto(Pos pos) {
         return new PosBaseDto(
+                pos.getId(),
                 pos.getName(),
                 pos.getTelephone(),
                 pos.getCellphone(),
