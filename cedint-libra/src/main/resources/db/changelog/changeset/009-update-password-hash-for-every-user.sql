@@ -1,0 +1,2 @@
+update USERS set PASSWORD = '$2a$12$IKIPL5UzIV5jmhELA6YyrOhFkAUN3FgnmkXCOy78D3q18LIpq1IMu'
+where ID in (1,2,3,4)

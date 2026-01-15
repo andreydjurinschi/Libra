@@ -61,3 +61,10 @@ databaseChangeLog:
         - sqlFile:
             path: changeset/008-insert-into-issues-table.sql
             relativeToChangelogFile: true
+  - changeSet:
+      id: 010
+      author: andrei
+      changes:
+        - sqlFile:
+            path: changeset/009-update-password-hash-for-every-user.sql
+            relativeToChangelogFile: true
