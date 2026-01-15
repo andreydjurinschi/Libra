@@ -5,7 +5,9 @@ import org.cedacri.spring.cedintlibra.entity.UserType;
 
 public class UserTypeMapper {
 
-    public static UserTypeDto mapToDto(UserType type){
-        return new UserTypeDto(type.getUserType());
-    }
-}
+    public static UserTypeDto mapToDto(UserType userType) {
+        return new UserTypeDto(
+                userType.getId(),
+                userType.getUserType()
+        );
+    }}

@@ -8,6 +8,7 @@ import org.cedacri.spring.cedintlibra.dto_s.user.UserWithTypeDto;
 import org.cedacri.spring.cedintlibra.services.user.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,13 +38,13 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserWithType(id));
     }
 
-    @PostMapping("/create")
+    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createUser(@RequestBody @Valid UserCreateDto dto){
         userService.createUser(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping(value = "/update/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updateUser(@PathVariable("id") Long id, @RequestBody @Valid UserUpdateDto dto){
         userService.updateUser(id, dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
