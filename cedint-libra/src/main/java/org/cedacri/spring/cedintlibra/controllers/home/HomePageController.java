@@ -1,6 +1,9 @@
 package org.cedacri.spring.cedintlibra.controllers.home;
 
 import org.cedacri.spring.cedintlibra.services.issue.IssueService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +19,10 @@ public class HomePageController {
     @GetMapping("/libra/home")
     public String home(Model model) {
 
+        UserDetails userDetails = getUserData();
+
         model.addAttribute("title", "Libra");
-        model.addAttribute("userLogin", "Temporar_Login123"); // TODO: print user login after authorizing
-        model.addAttribute("logout", "Logout"); // TODO: logout logic
+        model.addAttribute("userLogin", userDetails.getUsername());
         model.addAttribute("allIssues", issueService.getAll());
         model.addAttribute("assignedCount",
                 issueService.getIssueCountByStatus("ASSIGNED"));
@@ -35,4 +39,8 @@ public class HomePageController {
         return "home";
     }
 
+    private UserDetails getUserData(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return (UserDetails) authentication.getPrincipal();
+    }
 }

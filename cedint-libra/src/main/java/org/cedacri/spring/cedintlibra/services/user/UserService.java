@@ -39,16 +39,18 @@ public class UserService {
 
     @Transactional
     public void createUser(UserCreateDto dto){
+        PasswordUtil passwordUtil = new PasswordUtil();
         UserType userType = userTypeRepository.findById(dto.getUserTypeId())
                 .orElseThrow(() -> new NoSuchElementException("user type does not exist"));
         User user = UserMapper.mapCreateDtoToEntity(dto);
         user.setUserType(userType);
-        user.setPassword(PasswordUtil.hash(dto.getPassword()));
+        user.setPassword(passwordUtil.encode(dto.getPassword()));
         userRepository.save(user);
     }
-    
+
     @Transactional
     public void updateUser(Long id,UserUpdateDto dto) {
+        PasswordUtil passwordUtil = new PasswordUtil();
         User user = getUser(id);
 
         if (notBlank(dto.getName())) {
@@ -61,7 +63,7 @@ public class UserService {
             user.setLogin(dto.getLogin());
         }
         if (notBlank(dto.getPassword())) {
-            String encoded = PasswordUtil.hash(dto.getPassword());
+            String encoded = passwordUtil.encode(dto.getPassword());
             user.setPassword(encoded);
         }
         if (notBlank(dto.getTelephone())) {
