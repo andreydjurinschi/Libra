@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Users</title>
+</head>
+<body>
+<div class="col-lg-10 py-3" th:fragment="main-content">
+    <div class="border rounded-3 p-4">
+        <br>
+        <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
+            <h2 class="mb-0" th:text="${title}"></h2>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-primary">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Login</th>
+                    <th>Telephone</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="user: ${userList}">
+                    <td th:text="${user.name}">1</td>
+                    <td th:text="${user.email}">1</td>
+                    <td th:text="${user.login}">1</td>
+                    <td th:text="${user.telephone}">1</td>
+                </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

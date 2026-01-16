@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:sec="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<div class="col-md-4 col-lg-2 bg-light sidebar min-vh-100 py-3"   th:fragment="left-nav-menu">
+<div class="col-md-4 col-lg-2 bg-light sidebar min-vh-100 py-3" th:fragment="left-nav-menu">
     <nav class="nav nav-pills flex-column">
 
         <a class="nav-link" href="/libra/home">
@@ -24,8 +24,8 @@
                         <i class="bi bi-upc-scan me-2"></i> POS
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="posDropdown">
-                        <li><a class="dropdown-item" href="#">Create POS</a></li> <!--TODO: Create Pos Form-->
-                        <li><a class="dropdown-item" href="/libra/pos">Browse POS</a></li>
+                        <li><a class="dropdown-item" href="/libra/pos/create">Create POS</a></li> <!--TODO: Create Pos Form-->
+                        <li><a class="dropdown-item" href="/libra/pos/all">Browse POS</a></li>
                     </ul>
                 </li>
             </ul>
@@ -44,7 +44,7 @@
                 </li>
             </ul>
         </div>
-        <div class="nav-item dropdown">
+        <div class="nav-item dropdown" sec:authorize="hasRole('Administrator')">
             <ul class="nav flex-column">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown"
@@ -53,7 +53,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="userDropdown">
                         <li><a class="dropdown-item" href="/libra/users/create">Create User</a></li>
-                        <li><a class="dropdown-item" href="#">Browse Users</a></li> <!--TODO: Browse Users-->
+                        <li><a class="dropdown-item" href="/libra/users/all">Browse Users</a></li> <!--TODO: Browse Users-->
                     </ul>
                 </li>
             </ul>

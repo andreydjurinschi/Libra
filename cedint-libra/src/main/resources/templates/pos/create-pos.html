@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create Pos</title>
+
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+          crossorigin="anonymous">
+
+    <!-- icons -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+<nav th:insert="~{fragments/general/nav-bar ::navBar }"></nav>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Create POS</h4>
+                </div>
+
+                <div class="card-body">
+                    <form th:action="@{/libra/pos/create}"
+                          th:object="${form}"
+                          method="post">
+                    <div class="alert alert-danger"
+                         th:if="${#fields.hasErrors('*')}">
+                        Please fix the errors below
+                    </div>
+                        <div class="mb-3">
+                            <label class="form-label">POS Name</label>
+                            <input type="text"
+                                   class="form-control"
+                                   th:field="*{name}"
+                                   th:classappend="${#fields.hasErrors('name')} ? 'is-invalid'">
+                            <div class="invalid-feedback"
+                                 th:errors="*{name}"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Telephone</label>
+                                <input type="text"
+                                       class="form-control"
+                                       th:field="*{telephone}"
+                                       th:classappend="${#fields.hasErrors('telephone')} ? 'is-invalid'">
+                                <div class="invalid-feedback"
+                                     th:errors="*{telephone}"></div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Cellphone</label>
+                                <input type="text"
+                                       class="form-control"
+                                       th:field="*{cellphone}"
+                                       th:classappend="${#fields.hasErrors('cellphone')} ? 'is-invalid'">
+                                <div class="invalid-feedback"
+                                     th:errors="*{cellphone}"></div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Address</label>
+                            <input type="text"
+                                   class="form-control"
+                                   th:field="*{address}"
+                                   th:classappend="${#fields.hasErrors('address')} ? 'is-invalid'">
+                            <div class="invalid-feedback"
+                                 th:errors="*{address}"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Model</label>
+                                <input type="text"
+                                       class="form-control"
+                                       th:field="*{model}"
+                                       th:classappend="${#fields.hasErrors('model')} ? 'is-invalid'">
+                                <div class="invalid-feedback"
+                                     th:errors="*{model}"></div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Brand</label>
+                                <input type="text"
+                                       class="form-control"
+                                       th:field="*{brand}"
+                                       th:classappend="${#fields.hasErrors('brand')} ? 'is-invalid'">
+                                <div class="invalid-feedback"
+                                     th:errors="*{brand}"></div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">City</label>
+                            <select class="form-select"
+                                    th:field="*{city}"
+                                    th:classappend="${#fields.hasErrors('city')} ? 'is-invalid'">
+                                <option value="">-- Select city --</option>
+                                <option th:each="c : ${cities}"
+                                        th:value="${c.id}"
+                                        th:text="${c.name}">
+                                </option>
+                            </select>
+                            <div class="invalid-feedback"
+                                 th:errors="*{city}"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Connection Type</label>
+                            <select class="form-select"
+                                    th:field="*{connectionTypeId}"
+                                    th:classappend="${#fields.hasErrors('connectionTypeId')} ? 'is-invalid'">
+                                <option value="">-- Select connection type --</option>
+                                <option th:each="ct : ${connectionTypes}"
+                                        th:value="${ct.id}"
+                                        th:text="${ct.connectionType}">
+                                </option>
+                            </select>
+                            <div class="invalid-feedback"
+                                 th:errors="*{connectionTypeId}"></div>
+                        </div>
+                        <h5 class="mt-4">Working hours</h5>
+
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">Morning open</label>
+                                <input type="time"
+                                       class="form-control"
+                                       th:field="*{morningOpening}"
+                                       th:classappend="${#fields.hasErrors('morningOpening')} ? 'is-invalid'">
+                                <div class="invalid-feedback"
+                                     th:errors="*{morningOpening}"></div>
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">Morning close</label>
+                                <input type="time"
+                                       class="form-control"
+                                       th:field="*{morningClosing}"
+                                       th:classappend="${#fields.hasErrors('morningClosing')} ? 'is-invalid'">
+                                <div class="invalid-feedback"
+                                     th:errors="*{morningClosing}"></div>
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">Afternoon open</label>
+                                <input type="time"
+                                       class="form-control"
+                                       th:field="*{afternoonOpening}"
+                                       th:classappend="${#fields.hasErrors('afternoonOpening')} ? 'is-invalid'">
+                                <div class="invalid-feedback"
+                                     th:errors="*{afternoonOpening}"></div>
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">Afternoon close</label>
+                                <input type="time"
+                                       class="form-control"
+                                       th:field="*{afternoonClosing}"
+                                       th:classappend="${#fields.hasErrors('afternoonClosing')} ? 'is-invalid'">
+                                <div class="invalid-feedback"
+                                     th:errors="*{afternoonClosing}"></div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Days closed</label>
+                            <div class="row">
+                                <div class="col-md-3"
+                                     th:each="day : ${weekDays}">
+                                    <div class="form-check">
+                                        <input class="form-check-input"
+                                               type="checkbox"
+                                               th:field="*{daysClosed}"
+                                               th:value="${day}">
+                                        <label class="form-check-label"
+                                               th:text="${day}">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Insert date</label>
+                            <input type="date"
+                                   class="form-control"
+                                   th:field="*{insertDate}"
+                                   th:classappend="${#fields.hasErrors('insertDate')} ? 'is-invalid'">
+                            <div class="invalid-feedback"
+                                 th:errors="*{insertDate}"></div>
+                        </div>
+                        <div class="d-flex justify-content-end gap-2">
+                            <a th:href="@{/libra/pos/all}" class="btn btn-secondary">
+                                Cancel
+                            </a>
+                            <button type="submit" class="btn btn-success">
+                                Create POS
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

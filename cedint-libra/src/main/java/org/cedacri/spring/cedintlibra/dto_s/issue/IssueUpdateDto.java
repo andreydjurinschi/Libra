@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.FutureOrPresent;
 import org.cedacri.spring.cedintlibra.entity.util_models.GeneralType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -26,12 +27,14 @@ public class IssueUpdateDto {
     private String problemTitle;
 
     private Long assignedToId;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate assignedDate;
-
     @PastOrPresent
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate creationDate;
-
     @FutureOrPresent
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate modifyDate;
 
     private String solution;
@@ -144,4 +147,6 @@ public class IssueUpdateDto {
     public void setSolution(String solution) {
         this.solution = solution;
     }
+
+
 }

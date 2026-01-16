@@ -23,10 +23,12 @@ public class UserController {
         this.userService = userService;
     }
 
+/*
     @GetMapping("/all")
     public ResponseEntity<List<UserBaseDto>> getAllUsers(){
         return ResponseEntity.status(HttpStatus.OK).body(userService.getAllUsers());
     }
+*/
 
     @GetMapping("/{id}")
     public ResponseEntity<UserBaseDto> getById(@PathVariable("id") Long id){

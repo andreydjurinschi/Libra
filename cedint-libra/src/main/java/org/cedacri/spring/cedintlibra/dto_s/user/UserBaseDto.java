@@ -1,18 +1,28 @@
 package org.cedacri.spring.cedintlibra.dto_s.user;
 
 public class UserBaseDto {
+    private Long id;
     private String name;
     private String email;
     private String login;
     private String telephone;
 
 
-    public UserBaseDto(String name, String email, String login, String telephone) {
+    public UserBaseDto(Long id, String name, String email, String login, String telephone) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.login = login;
         this.telephone = telephone;
 
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
