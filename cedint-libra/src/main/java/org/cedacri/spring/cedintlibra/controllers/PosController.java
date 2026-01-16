@@ -21,21 +21,23 @@ public class PosController {
         this.posService = posService;
     }
 
-    @GetMapping("/all")
+/*    @GetMapping("/all")
     public ResponseEntity<List<PosBaseDto>> getAll(){
         return ResponseEntity.ok(posService.findAll());
-    }
+    }*/
 
     @GetMapping("/{id}")
     public ResponseEntity<PosBaseDto> getById(@PathVariable("id") Long id){
         return ResponseEntity.ok(posService.findById(id));
     }
 
+/*
     @PostMapping("/create")
     public ResponseEntity<Void> create(@RequestBody @Valid PosCreateDto dto){
         posService.createPos(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }
+*/
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Void> update(@RequestBody @Valid PosCreateDto dto, @PathVariable("id") Long id){

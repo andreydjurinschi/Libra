@@ -12,7 +12,7 @@ public class IssueBaseDto {
     private GeneralType generalType;
     private String problemTitle;
     private Integer priority;
-    private Long statusId;
+    private Long status;
     private String memo;
     private Long userCreatedId;
     private Long assignedToId;
@@ -32,7 +32,7 @@ public class IssueBaseDto {
             GeneralType generalType,
             String problemTitle,
             Integer priority,
-            Long statusId,
+            Long status,
             String memo,
             Long userCreatedId,
             Long assignedToId,
@@ -48,7 +48,7 @@ public class IssueBaseDto {
         this.generalType = generalType;
         this.problemTitle = problemTitle;
         this.priority = priority;
-        this.statusId = statusId;
+        this.status = status;
         this.memo = memo;
         this.userCreatedId = userCreatedId;
         this.assignedToId = assignedToId;
@@ -109,12 +109,12 @@ public class IssueBaseDto {
         this.priority = priority;
     }
 
-    public Long getStatusId() {
-        return statusId;
+    public Long getStatus() {
+        return status;
     }
 
-    public void setStatusId(Long statusId) {
-        this.statusId = statusId;
+    public void setStatus(Long status) {
+        this.status = status;
     }
 
     public String getMemo() {

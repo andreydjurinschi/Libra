@@ -1,28 +1,81 @@
 package org.cedacri.spring.cedintlibra.controllers.pos;
 
+import jakarta.validation.Valid;
+import org.cedacri.spring.cedintlibra.dto_s.pos.PosCreateDto;
+import org.cedacri.spring.cedintlibra.entity.util_models.WeekDays;
+import org.cedacri.spring.cedintlibra.services.city.CityService;
+import org.cedacri.spring.cedintlibra.services.connection_type.ConnectionTypeService;
 import org.cedacri.spring.cedintlibra.services.pos.PosService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Set;
 
 @Controller
 public class PosPageController {
+
     private final PosService posService;
+    private final Set<WeekDays> weekDaysSet;
+    private final CityService cityService;
+    private final ConnectionTypeService connectionTypeService;
 
-
-    public PosPageController(PosService posService) {
+    public PosPageController(
+            PosService posService,
+            Set<WeekDays> weekDaysSet,
+            CityService cityService,
+            ConnectionTypeService connectionTypeService
+    ) {
         this.posService = posService;
+        this.weekDaysSet = weekDaysSet;
+        this.cityService = cityService;
+        this.connectionTypeService = connectionTypeService;
     }
 
-    @GetMapping("/libra/pos")
-    public String posPage(Model model){
-        model.addAttribute("title", "POS MANAGER");
-        model.addAttribute("userLogin", getUserData().getUsername());
+
+    @GetMapping("/libra/pos/all")
+    public String showAllPoses(Model model){
+        UserDetails userDetails = getUserData();
         model.addAttribute("allPos", posService.findAll());
-        return "allPos";
+        model.addAttribute("userLogin", userDetails.getUsername());
+        return "/pos/allPos";
+    }
+    @GetMapping("/libra/pos/create")
+    public String showCreateForm(Model model) {
+        model.addAttribute("form", new PosCreateDto());
+        model.addAttribute("weekDays", weekDaysSet);
+        model.addAttribute("cities", cityService.getAll());
+        model.addAttribute("connectionTypes", connectionTypeService.getAll());
+        UserDetails userDetails = getUserData();
+        model.addAttribute("userLogin", userDetails.getUsername());
+        return "pos/create-pos";
+    }
+
+
+    @PostMapping("/libra/pos/create")
+    public String createPos(
+            @Valid @ModelAttribute("form") PosCreateDto form,
+            BindingResult bindingResult,
+            Model model
+    ) {
+        if (bindingResult.hasErrors()) {
+            fillDictionaries(model);
+            return "pos/create-pos";
+        }
+        posService.createPos(form);
+        return "pos/allPos";
+    }
+
+    private void fillDictionaries(Model model) {
+        model.addAttribute("weekDays", weekDaysSet);
+        model.addAttribute("cities", cityService.getAll());
+        model.addAttribute("connectionTypes", connectionTypeService.getAll());
     }
 
     private UserDetails getUserData(){

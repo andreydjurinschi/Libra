@@ -1,38 +1,15 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
-    <inspection_tool class="DataFlowIssue" enabled="true" level="WARNING" enabled_by_default="true">
-      <option name="SUGGEST_NULLABLE_ANNOTATIONS" value="false" />
-      <option name="DONT_REPORT_TRUE_ASSERT_STATEMENTS" value="false" />
-      <option name="REPORT_NULLABLE_METHODS_RETURNING_NOT_NULL" value="false" />
-    </inspection_tool>
-    <inspection_tool class="IncorrectHttpHeaderInspection" enabled="true" level="WARNING" enabled_by_default="true">
-      <option name="customHeaders">
-        <set>
-          <option value="    &quot;name&quot;" />
-          <option value="    &quot;email&quot;" />
-          <option value="    &quot;userTypeId&quot;" />
-          <option value="}" />
-          <option value="{" />
-          <option value="    &quot;login&quot;" />
-          <option value="    &quot;password&quot;" />
-          <option value="    &quot;telephone&quot;" />
-          <option value="  &quot;name&quot;" />
-          <option value="  &quot;telephone&quot;" />
-          <option value="  &quot;cellphone&quot;" />
-          <option value="  &quot;address&quot;" />
-          <option value="  &quot;model&quot;" />
-          <option value="  &quot;brand&quot;" />
-          <option value="  &quot;city&quot;" />
-          <option value="  &quot;connectionTypeId&quot;" />
-          <option value="  &quot;morningOpening&quot;" />
-          <option value="  &quot;morningClosing&quot;" />
-          <option value="  &quot;afternoonOpening&quot;" />
-          <option value="  &quot;afternoonClosing&quot;" />
-          <option value="  &quot;daysClosed&quot;" />
-          <option value="  &quot;insertDate&quot;" />
-        </set>
+    <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="1">
+            <item index="0" class="java.lang.String" itemvalue="sec:authorize" />
+          </list>
+        </value>
       </option>
+      <option name="myCustomValuesEnabled" value="true" />
     </inspection_tool>
     <inspection_tool class="NullableProblems" enabled="false" level="WARNING" enabled_by_default="false">
       <option name="REPORT_NULLABLE_METHOD_OVERRIDES_NOTNULL" value="true" />
@@ -44,6 +21,6 @@
       <option name="REPORT_ANNOTATION_NOT_PROPAGATED_TO_OVERRIDERS" value="true" />
       <option name="REPORT_NULLS_PASSED_TO_NON_ANNOTATED_METHOD" value="true" />
     </inspection_tool>
-    <inspection_tool class="SqlNoDataSourceInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="ThymeleafVariablesResolveInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
   </profile>
 </component>

@@ -21,7 +21,7 @@ public class PosCreateDto {
     private String model;
     @NotBlank(message = "brand cannot be empty")
     private String brand;
-    @NotNull(message = "coty is required")
+    @NotNull(message = "city is required")
     private Long city;
     private Long connectionTypeId;
 

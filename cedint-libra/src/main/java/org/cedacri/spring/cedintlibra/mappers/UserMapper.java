@@ -10,7 +10,7 @@ public class UserMapper {
 
     public static UserBaseDto mapToDto(User user){
         return new UserBaseDto(
-                user.getName(), user.getEmail(), user.getLogin(), user.getTelephone()
+                user.getId(),user.getName(), user.getEmail(), user.getLogin(), user.getTelephone()
         );
     }
 

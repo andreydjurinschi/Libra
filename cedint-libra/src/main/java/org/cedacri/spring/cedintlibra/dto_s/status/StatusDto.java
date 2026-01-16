@@ -1,10 +1,11 @@
 package org.cedacri.spring.cedintlibra.dto_s.status;
 
 public class StatusDto {
-
+    private Long id;
     private String status;
 
-    public StatusDto(String status) {
+    public StatusDto(Long id, String status) {
+        this.id = id;
         this.status = status;
     }
 
@@ -14,5 +15,13 @@ public class StatusDto {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
