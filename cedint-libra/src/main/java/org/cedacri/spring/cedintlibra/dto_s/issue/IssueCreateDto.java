@@ -2,6 +2,7 @@ package org.cedacri.spring.cedintlibra.dto_s.issue;
 
 import jakarta.validation.constraints.*;
 import org.cedacri.spring.cedintlibra.entity.util_models.GeneralType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -42,10 +43,11 @@ public class IssueCreateDto {
     @FutureOrPresent
     private LocalDate assignedDate;
 
-    @NotNull
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @PastOrPresent
     private LocalDate creationDate;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @FutureOrPresent
     private LocalDate modifyDate;
 

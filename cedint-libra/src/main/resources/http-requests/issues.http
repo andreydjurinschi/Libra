@@ -1,3 +1,10 @@
+### Login (create session cookie)
+POST http://localhost:8080/libra/login
+Content-Type: application/x-www-form-urlencoded
+
+login=camelia_gavriliuc&password=pass2004
+
+
 ### Get all issues
 GET http://localhost:8080/libra/issues/all
 Accept: application/json

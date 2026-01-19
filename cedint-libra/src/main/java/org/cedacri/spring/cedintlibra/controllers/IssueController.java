@@ -7,6 +7,7 @@ import org.cedacri.spring.cedintlibra.dto_s.issue.IssueUpdateDto;
 import org.cedacri.spring.cedintlibra.entity.Status;
 import org.cedacri.spring.cedintlibra.services.issue.IssueService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,13 +34,13 @@ public class IssueController {
         return ResponseEntity.ok(issueService.getById(id));
     }
 
-    @PostMapping("/create")
+    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> create(@RequestBody @Valid IssueCreateDto dto) {
         issueService.create(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping(value = "/update/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> update(@PathVariable("id") Long id, @RequestBody @Valid IssueUpdateDto dto) {
         issueService.update(id, dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(null);

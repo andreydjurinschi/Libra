@@ -1,9 +1,7 @@
-ALTER TABLE issues
-    ALTER COLUMN id_type DROP NOT NULL;
+
 
 INSERT INTO issues (
     id_pos,
-    id_type,
     general_type,
     problem_title,
     priority,
@@ -20,7 +18,6 @@ INSERT INTO issues (
 VALUES
     (
         1,
-        NULL,
         'CONNECTION_ISSUE',
         'Terminal cannot connect to server',
         1,
@@ -36,7 +33,6 @@ VALUES
     ),
     (
         1,
-        NULL,
         'HARDWARE_FAILURE',
         'Printer not working',
         2,
@@ -52,7 +48,6 @@ VALUES
     ),
     (
         1,
-        NULL,
         'SOFTWARE_ERROR',
         'Application crash on payment',
         1,
