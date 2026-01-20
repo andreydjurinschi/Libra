@@ -18,7 +18,7 @@ public class IssueService {
 
     private final IssueRepository issueRepository;
     private final PosRepository posRepository;
-    private final IssueTypeRepository issueTypeRepository;
+    //private final IssueTypeRepository issueTypeRepository;
     private final StatusRepository statusRepository;
     private final UserRepository userRepository;
 
@@ -29,7 +29,7 @@ public class IssueService {
                         UserRepository userRepository) {
         this.issueRepository = issueRepository;
         this.posRepository = posRepository;
-        this.issueTypeRepository = issueTypeRepository;
+        //this.issueTypeRepository = issueTypeRepository;
         this.statusRepository = statusRepository;
         this.userRepository = userRepository;
     }

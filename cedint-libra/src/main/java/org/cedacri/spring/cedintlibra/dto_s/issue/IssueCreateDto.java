@@ -12,10 +12,6 @@ public class IssueCreateDto {
     private Long posId;
 
     private Long userCreatedId;
-
-    @NotNull(message = "type is required")
-    private Long type;
-
     // priority rate would be between 1 and 5
     @NotNull
     @Min(value = 1, message = "priority rate cannot be lower than 1 (from 1 to 5)")
@@ -71,14 +67,6 @@ public class IssueCreateDto {
 
     public void setUserCreatedId(Long userCreatedId) {
         this.userCreatedId = userCreatedId;
-    }
-
-    public Long getType() {
-        return type;
-    }
-
-    public void setType(Long type) {
-        this.type = type;
     }
 
     public Integer getPriority() {
