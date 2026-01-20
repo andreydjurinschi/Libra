@@ -3,7 +3,7 @@ databaseChangeLog:
   - logicalFilePath: db/changelog/db.changelog-master.yaml
 
   - changeSet:
-      id: 001
+      id: 011
       author: andrei
       changes:
         - sqlFile:
@@ -11,7 +11,7 @@ databaseChangeLog:
             relativeToChangelogFile: true
 
   - changeSet:
-      id: 002
+      id: 012
       author: andrei
       changes:
         - sqlFile:
@@ -19,7 +19,7 @@ databaseChangeLog:
             relativeToChangelogFile: true
 
   - changeSet:
-      id: 003
+      id: 013
       author: andrei
       changes:
         - sqlFile:
@@ -27,42 +27,42 @@ databaseChangeLog:
             relativeToChangelogFile: true
 
   - changeSet:
-      id: 004
+      id: 014
       author: andrei
       changes:
         - sqlFile:
             path: changeset/004-insert-into-STATUSES-table.sql
             relativeToChangelogFile: true
   - changeSet:
-      id: 005
+      id: 015
       author: andrei
       changes:
         - sqlFile:
             path: changeset/005-insert-data-into-users-table.sql
             relativeToChangelogFile: true
   - changeSet:
-      id: 006
+      id: 016
       author: andrei
       changes:
         - sqlFile:
             path: changeset/006-insert-into-pos-table.sql
             relativeToChangelogFile: true
   - changeSet:
-      id: 007
+      id: 017
       author: andrei
       changes:
         - sqlFile:
             path: changeset/007-insert-into-pos-days-closed.sql
             relativeToChangelogFile: true
   - changeSet:
-      id: 008
+      id: 018
       author: andrei
       changes:
         - sqlFile:
             path: changeset/008-insert-into-issues-table.sql
             relativeToChangelogFile: true
   - changeSet:
-      id: 010
+      id: 019
       author: andrei
       changes:
         - sqlFile:

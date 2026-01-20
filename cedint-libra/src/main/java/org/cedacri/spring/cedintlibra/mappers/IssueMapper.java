@@ -11,7 +11,7 @@ public class IssueMapper {
         return new IssueBaseDto(
                 issue.getId(),
                 issue.getPos() != null ? issue.getPos().getId() : null,
-                issue.getType() != null ? issue.getType().getId() : null,
+//                issue.getType() != null ? issue.getType().getId() : null,
                 issue.getGeneralType(),
                 issue.getProblemTitle(),
                 issue.getPriority(),

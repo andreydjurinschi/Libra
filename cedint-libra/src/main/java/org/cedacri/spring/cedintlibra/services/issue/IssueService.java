@@ -18,7 +18,7 @@ public class IssueService {
 
     private final IssueRepository issueRepository;
     private final PosRepository posRepository;
-    private final IssueTypeRepository issueTypeRepository;
+    //private final IssueTypeRepository issueTypeRepository;
     private final StatusRepository statusRepository;
     private final UserRepository userRepository;
 
@@ -29,7 +29,7 @@ public class IssueService {
                         UserRepository userRepository) {
         this.issueRepository = issueRepository;
         this.posRepository = posRepository;
-        this.issueTypeRepository = issueTypeRepository;
+        //this.issueTypeRepository = issueTypeRepository;
         this.statusRepository = statusRepository;
         this.userRepository = userRepository;
     }
@@ -45,8 +45,8 @@ public class IssueService {
         issue.setPos(posRepository.findById(dto.getPosId())
                 .orElseThrow(() -> new RuntimeException("POS not found: " + dto.getPosId())));
 
-        issue.setType(issueTypeRepository.findById(dto.getType())
-                .orElseThrow(() -> new RuntimeException("IssueType not found: " + dto.getType())));
+//        issue.setType(issueTypeRepository.findById(dto.getType())
+//                .orElseThrow(() -> new RuntimeException("IssueType not found: " + dto.getType())));
 
         issue.setStatus(statusRepository.findById(dto.getStatus())
                 .orElseThrow(() -> new RuntimeException("Status not found: " + dto.getStatus())));
@@ -77,10 +77,10 @@ public class IssueService {
             issue.setPos(posRepository.findById(dto.getPosId())
                     .orElseThrow(() -> new RuntimeException("POS not found: " + dto.getPosId())));
         }
-        if (dto.getType() != null) {
-            issue.setType(issueTypeRepository.findById(dto.getType())
-                    .orElseThrow(() -> new RuntimeException("IssueType not found: " + dto.getType())));
-        }
+//        if (dto.getType() != null) {
+//            issue.setType(issueTypeRepository.findById(dto.getType())
+//                    .orElseThrow(() -> new RuntimeException("IssueType not found: " + dto.getType())));
+//        }
         if (dto.getStatus() != null) {
             issue.setStatus(statusRepository.findById(dto.getStatus())
                     .orElseThrow(() -> new RuntimeException("Status not found: " + dto.getStatus())));

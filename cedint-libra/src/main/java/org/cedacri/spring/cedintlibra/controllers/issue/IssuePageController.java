@@ -16,6 +16,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import jakarta.validation.Valid;
+import org.cedacri.spring.cedintlibra.dto_s.issue.IssueCreateDto;
+import org.cedacri.spring.cedintlibra.entity.User;
+import org.cedacri.spring.cedintlibra.repositories.UserRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.validation.BindingResult;
+
+import java.time.LocalDate;
+
 
 import java.util.List;
 
@@ -26,12 +37,18 @@ public class IssuePageController {
     private final IssueTypeService issueTypeService;
     private final StatusService statusService;
     private final UserService userService;
-    public IssuePageController(IssueService issueService, PosService posService, IssueTypeService issueTypeService, StatusService statusService, UserService userService) {
+    private final UserRepository userRepository;
+
+    public IssuePageController(IssueService issueService, PosService posService,
+                               IssueTypeService issueTypeService, StatusService statusService,
+                               UserService userService,
+                               UserRepository userRepository) {
         this.issueService = issueService;
         this.posService = posService;
         this.issueTypeService = issueTypeService;
         this.statusService = statusService;
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
 /*    @GetMapping("libra/issues/detailed/{id}")
@@ -46,33 +63,78 @@ public class IssuePageController {
     }*/
 
 
-    @GetMapping("libra/issues/detailed/{id}")
-    public String getIssue(@PathVariable Long id, Model model) {
-        IssueBaseDto issue = issueService.getById(id);
+    @GetMapping("/libra/issues/create")
+    public String showCreateIssueForm(Model model) {
 
-        model.addAttribute("issue", issue);
+        IssueCreateDto form = new IssueCreateDto();
 
+        // required by validations
+        form.setCreationDate(LocalDate.now());
+        form.setModifyDate(LocalDate.now());
+
+        // REQUIRED by IssueService.create()
+        UserDetails userDetails = getCurrentUser();
+        User currentUser = userRepository.findByLoginWithType(userDetails.getUsername());
+        if (currentUser == null) {
+            throw new IllegalStateException(
+                    "Logged-in user not found in DB. login=" + userDetails.getUsername()
+            );
+        }
+
+        form.setUserCreatedId(currentUser.getId());
+
+        model.addAttribute("form", form);
+
+        // dropdowns / lists (same as detailed page)
+        populateCreateIssueModel(model);
+
+        return "issue/create-issue";
+    }
+
+    @PostMapping("/libra/issues/create")
+    public String createIssue(
+            @Valid @ModelAttribute("form") IssueCreateDto form,
+            BindingResult bindingResult,
+            Model model,
+            RedirectAttributes ra
+    ) {
+        if (bindingResult.hasErrors()) {
+            populateCreateIssueModel(model);
+            return "issue/create-issue";
+        }
+
+        issueService.create(form);
+        ra.addFlashAttribute("success", "Issue created successfully");
+        return "redirect:/libra/home";
+    }
+
+    private void populateCreateIssueModel(Model model) {
         model.addAttribute("generalTypes", GeneralType.values());
         model.addAttribute("types", issueTypeService.getAll());
         model.addAttribute("statuses", statusService.getAll());
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("positions", posService.findAll());
-
         model.addAttribute("priorities", List.of(1,2,3,4,5));
-
-        model.addAttribute("pos", posService.findById(issue.getPosId()));
-
-        return "issue/issue-details-page";
     }
 
-    @PostMapping("libra/issues/update/{id}")
-    public String updateIssue(@PathVariable Long id,
-                              @ModelAttribute("issue") IssueUpdateDto dto,
-                              RedirectAttributes ra) {
-        issueService.update(id, dto);
-        ra.addFlashAttribute("success", "Issue updated successfully");
-        return "redirect:/libra/home";
+    private UserDetails getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new IllegalStateException("Not authenticated (authentication is null or not authenticated)");
+        }
+
+        Object principal = authentication.getPrincipal();
+
+        if (principal instanceof UserDetails ud) {
+            return ud;
+        }
+
+        // common case when not logged in
+        throw new IllegalStateException("Principal is not UserDetails: " + principal);
     }
+
+
 
 
 

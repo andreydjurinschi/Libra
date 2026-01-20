@@ -17,9 +17,9 @@ public class Issue {
     @JoinColumn(name = "id_pos", nullable = false)
     private Pos pos;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+/*    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_type") // TODO: return nullable false
-    private IssueType type;
+    private IssueType type;*/
 
     @Enumerated(EnumType.STRING)
     private GeneralType generalType;
@@ -65,6 +65,7 @@ public class Issue {
         this.pos = pos;
     }
 
+/*
     public IssueType getType() {
         return type;
     }
@@ -72,6 +73,7 @@ public class Issue {
     public void setType(IssueType type) {
         this.type = type;
     }
+*/
 
 
     public String getProblemTitle() {

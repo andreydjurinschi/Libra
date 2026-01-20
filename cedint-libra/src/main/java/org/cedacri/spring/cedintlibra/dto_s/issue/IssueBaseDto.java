@@ -8,7 +8,6 @@ public class IssueBaseDto {
 
     private Long id;
     private Long posId;
-    private Long typeId;
     private GeneralType generalType;
     private String problemTitle;
     private Integer priority;
@@ -28,7 +27,6 @@ public class IssueBaseDto {
     public IssueBaseDto(
             Long id,
             Long posId,
-            Long typeId,
             GeneralType generalType,
             String problemTitle,
             Integer priority,
@@ -44,7 +42,6 @@ public class IssueBaseDto {
     ) {
         this.id = id;
         this.posId = posId;
-        this.typeId = typeId;
         this.generalType = generalType;
         this.problemTitle = problemTitle;
         this.priority = priority;
@@ -75,14 +72,6 @@ public class IssueBaseDto {
 
     public void setPosId(Long posId) {
         this.posId = posId;
-    }
-
-    public Long getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId(Long typeId) {
-        this.typeId = typeId;
     }
 
     public GeneralType getGeneralType() {
