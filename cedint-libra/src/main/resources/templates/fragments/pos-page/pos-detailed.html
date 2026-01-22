@@ -11,49 +11,55 @@
 <div class="col-lg-10 py-3" th:fragment="pos-detailed-content">
     <form th:action="@{/libra/pos/update/{id}(id=${pos.id})}"
           th:object="${pos}"
-          method="post"> <!--TODO: pos action-->
+          method="post">
         <input type="hidden" name="_method" value="PUT"/>
+
+        <input type="hidden" th:field="*{morningOpening}"/>
+        <input type="hidden" th:field="*{morningClosing}"/>
+        <input type="hidden" th:field="*{afternoonOpening}"/>
+        <input type="hidden" th:field="*{afternoonClosing}"/>
+        <input type="hidden" th:field="*{insertDate}"/>
+
         <div class="card-body">
             <div class="mb-4">
                 <label for="pos-name-label">Pos Name: <span>*</span></label>
-                <input type="text" class="form-control" placeholder="Enter Pos Name" id="pos-name-label" th:field="${pos.name}">
+                <input type="text" class="form-control" placeholder="Enter Pos Name" id="pos-name-label" th:field="*{name}">
             </div>
             <div class="mb-4">
                 <label for="pos-telephone-label">Pos telephone: <span>*</span></label>
-                <input type="text" class="form-control" placeholder="Enter Pos telephone" id="pos-telephone-label" th:field="${pos.telephone}">
+                <input type="text" class="form-control" placeholder="Enter Pos telephone" id="pos-telephone-label" th:field="*{telephone}">
             </div>
             <div class="mb-4">
                 <label for="pos-cellphone-label">Pos cellphone: <span>*</span></label>
-                <input type="text" class="form-control" placeholder="Enter Pos cellphone" id="pos-cellphone-label" th:field="${pos.cellphone}">
+                <input type="text" class="form-control" placeholder="Enter Pos cellphone" id="pos-cellphone-label" th:field="*{cellphone}">
             </div>
             <div class="mb-4">
                 <label for="pos-address-label">Pos address: <span>*</span></label>
-                <input type="text" class="form-control" placeholder="Enter Pos Name" id="pos-address-label" th:field="${pos.address}">
+                <input type="text" class="form-control" placeholder="Enter Pos Name" id="pos-address-label" th:field="*{address}">
             </div>
             <div class="mb-4">
                 <label for="pos-model-label">Pos Model: <span>*</span></label>
-                <input type="text" class="form-control" placeholder="Enter Pos Name" id="pos-model-label" th:field="${pos.model}">
+                <input type="text" class="form-control" placeholder="Enter Pos Name" id="pos-model-label" th:field="*{model}">
             </div>
             <div class="mb-4">
                 <label for="pos-brand-label">Pos Brand: <span>*</span></label>
-                <input type="text" class="form-control" placeholder="Enter Pos Name" id="pos-brand-label" th:field="${pos.brand}">
+                <input type="text" class="form-control" placeholder="Enter Pos Name" id="pos-brand-label" th:field="*{brand}">
             </div>
             <div class="mb-4">
                 <label for="pos-city-label" class="form-label">City</label>
-                <select id="pos-city-label" class="form-select" th:field="${pos.city}">
+                <select id="pos-city-label" class="form-select" th:field="*{cityId}">
                     <option th:each="city : ${cities}"
                             th:value="${city.id}"
                             th:text="${city.name}">CITY</option>
-                    </option>
                 </select>
             </div>
             <div class="mb-4">
                 <label for="pos-connection-type-label" class="form-label">
-                    <select class="form-select" id="pos-connection-type-label" th:field="${pos.connectionType}">
+                    <select class="form-select" id="pos-connection-type-label" th:field="*{connectionTypeId}">
                         <option th:each="type : ${connectionTypes}"
                                 th:value="${type.id}"
-                                th:text="${type.connectionType}"
-                        ></option>
+                                th:text="${type.connectionType}">
+                        </option>
                     </select>
                 </label>
             </div>
@@ -67,6 +73,7 @@
             </div>
         </div>
     </form>
+
 </div>
 </body>
 </html>

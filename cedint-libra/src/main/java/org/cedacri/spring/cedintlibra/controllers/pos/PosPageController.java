@@ -3,6 +3,7 @@ package org.cedacri.spring.cedintlibra.controllers.pos;
 import jakarta.validation.Valid;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosCreateDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosDetailedDto;
+import org.cedacri.spring.cedintlibra.dto_s.pos.PosUpdateDto;
 import org.cedacri.spring.cedintlibra.entity.util_models.WeekDays;
 import org.cedacri.spring.cedintlibra.services.city.CityService;
 import org.cedacri.spring.cedintlibra.services.connection_type.ConnectionTypeService;
@@ -81,6 +82,12 @@ public class PosPageController {
         }
         posService.createPos(form);
         return "pos/allPos";
+    }
+
+    @PostMapping("/libra/pos/update/{id}")
+    public String updatePos(@PathVariable("id") Long posId, @ModelAttribute("pos")PosUpdateDto posUpdateDto){
+        posService.updatePos(posId, posUpdateDto);
+        return "redirect:/libra/pos/all";
     }
 
     private void fillDictionaries(Model model) {

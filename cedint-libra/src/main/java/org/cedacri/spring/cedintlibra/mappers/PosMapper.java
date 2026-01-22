@@ -5,6 +5,7 @@ import org.cedacri.spring.cedintlibra.dto_s.connection_type.ConnectionTypeDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosBaseDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosCreateDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosDetailedDto;
+import org.cedacri.spring.cedintlibra.dto_s.pos.PosUpdateDto;
 import org.cedacri.spring.cedintlibra.entity.Pos;
 
 public class PosMapper {
@@ -42,6 +43,25 @@ public class PosMapper {
         );
     }
 
+    public static Pos mapUpdatePosDtoToEntity(PosUpdateDto dto){
+        return new Pos(
+                dto.getName(),
+                dto.getTelephone(),
+                dto.getCellphone(),
+                dto.getAddress(),
+                dto.getModel(),
+                dto.getBrand(),
+                null,
+                null,
+                dto.getMorningOpening(),
+                dto.getMorningClosing(),
+                dto.getAfternoonOpening(),
+                dto.getAfternoonClosing(),
+                dto.getDaysClosed(),
+                dto.getInsertDate()
+        );
+    }
+
     public static PosDetailedDto mapToDetailedDto(Pos pos) {
 
         CityDto cityDto = CityMapper.mapToDto(pos.getCity());
@@ -56,7 +76,9 @@ public class PosMapper {
                 pos.getModel(),
                 pos.getBrand(),
                 cityDto,
+                cityDto.getId(),
                 connectionTypeDto,
+                connectionTypeDto.getId(),
                 pos.getMorningOpening(),
                 pos.getMorningClosing(),
                 pos.getAfternoonOpening(),

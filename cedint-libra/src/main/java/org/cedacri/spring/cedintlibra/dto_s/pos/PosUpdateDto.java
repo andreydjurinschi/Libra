@@ -15,7 +15,7 @@ public class PosUpdateDto {
     private String address;
     private String model;
     private String brand;
-    private Long city;
+    private Long cityId;
     private Long connectionTypeId;
     @PastOrPresent
     private LocalTime morningOpening;
@@ -31,14 +31,14 @@ public class PosUpdateDto {
     public PosUpdateDto() {
     }
 
-    public PosUpdateDto(String name, String telephone, String cellphone, String address, String model, String brand, Long city, Long connectionTypeId, LocalTime morningOpening, LocalTime morningClosing, LocalTime afternoonOpening, LocalTime afternoonClosing, Set<WeekDays> daysClosed, LocalDate insertDate) {
+    public PosUpdateDto(String name, String telephone, String cellphone, String address, String model, String brand, Long cityId, Long connectionTypeId, LocalTime morningOpening, LocalTime morningClosing, LocalTime afternoonOpening, LocalTime afternoonClosing, Set<WeekDays> daysClosed, LocalDate insertDate) {
         this.name = name;
         this.telephone = telephone;
         this.cellphone = cellphone;
         this.address = address;
         this.model = model;
         this.brand = brand;
-        this.city = city;
+        this.cityId = cityId;
         this.connectionTypeId = connectionTypeId;
         this.morningOpening = morningOpening;
         this.morningClosing = morningClosing;
@@ -96,12 +96,12 @@ public class PosUpdateDto {
         this.brand = brand;
     }
 
-    public Long getCity() {
-        return city;
+    public Long getCityId() {
+        return cityId;
     }
 
-    public void setCity(Long city) {
-        this.city = city;
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
     }
 
     public Long getConnectionTypeId() {

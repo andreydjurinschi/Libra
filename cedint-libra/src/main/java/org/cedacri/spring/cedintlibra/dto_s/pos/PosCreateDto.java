@@ -34,7 +34,6 @@ public class PosCreateDto {
 
     @NotNull
     private LocalTime afternoonOpening;
-
     @NotNull
     private LocalTime afternoonClosing;
     private Set<WeekDays> daysClosed;

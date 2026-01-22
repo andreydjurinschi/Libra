@@ -5,6 +5,7 @@ import org.cedacri.spring.cedintlibra.dto_s.issue.IssueBaseDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosBaseDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosCreateDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosDetailedDto;
+import org.cedacri.spring.cedintlibra.dto_s.pos.PosUpdateDto;
 import org.cedacri.spring.cedintlibra.entity.Issue;
 import org.cedacri.spring.cedintlibra.entity.util_models.WeekDays;
 import org.cedacri.spring.cedintlibra.mappers.IssueMapper;
@@ -20,11 +21,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.Set;
 
 @Service
 public class PosService {
@@ -68,7 +67,7 @@ public class PosService {
 
 
     @Transactional
-    public void updatePos(Long id, PosCreateDto dto) {
+    public void updatePos(Long id, PosUpdateDto dto) {
 
         if (dto == null) {
             throw new IllegalArgumentException("dto cannot be null");
@@ -106,11 +105,11 @@ public class PosService {
         }
         pos.setBrand(dto.getBrand().trim());
 
-        if (dto.getCity() == null) {
+        if (dto.getCityId() == null) {
             throw new IllegalArgumentException("city is required");
         }
 
-        City city = cityRepository.findById(dto.getCity())
+        City city = cityRepository.findById(dto.getCityId())
                 .orElseThrow(() -> new NoSuchElementException("City not found"));
         pos.setCity(city);
 
@@ -138,16 +137,13 @@ public class PosService {
         pos.setAfternoonOpening(afternoonOpening);
         pos.setAfternoonClosing(afternoonClosing);
 
-        Set<WeekDays> daysClosed = dto.getDaysClosed();
-        pos.setDaysClosed(Objects.requireNonNullElse(daysClosed, Set.of()));
-
+        pos.setDaysClosed(new HashSet<>(WeekDays.FRI.ordinal()));
+      // TODO days closed logic
 
         if (dto.getInsertDate() == null) {
             throw new IllegalArgumentException("insertDate is required");
         }
         pos.setInsertDate(dto.getInsertDate());
-
-
         posRepository.save(pos);
     }
 
