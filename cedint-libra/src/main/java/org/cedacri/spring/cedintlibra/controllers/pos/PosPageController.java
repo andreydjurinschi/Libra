@@ -38,12 +38,12 @@ public class PosPageController {
         this.connectionTypeService = connectionTypeService;
     }
 
-
     @GetMapping("/libra/pos/all")
     public String showAllPoses(Model model){
         UserDetails userDetails = getUserData();
         model.addAttribute("allPos", posService.findAll());
         model.addAttribute("userLogin", userDetails.getUsername());
+/*        model.addAttribute("posIssues", posService.getIssuesForPos());*/
         return "/pos/allPos";
     }
     @GetMapping("/libra/pos/create")

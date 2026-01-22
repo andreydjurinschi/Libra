@@ -11,6 +11,7 @@ import org.cedacri.spring.cedintlibra.entity.ConnectionType;
 import org.cedacri.spring.cedintlibra.entity.Pos;
 import org.cedacri.spring.cedintlibra.repositories.CityRepository;
 import org.cedacri.spring.cedintlibra.repositories.ConnectionTypeRepository;
+import org.cedacri.spring.cedintlibra.repositories.IssueRepository;
 import org.cedacri.spring.cedintlibra.repositories.PosRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -24,19 +25,19 @@ import java.util.Set;
 @Service
 public class PosService {
     private final PosRepository posRepository;
-
     private final CityRepository cityRepository;
+    private final IssueRepository issueRepository;
     private final ConnectionTypeRepository connectionTypeRepository;
 
-    public PosService(PosRepository posRepository, CityRepository cityRepository, ConnectionTypeRepository connectionTypeRepository) {
+    public PosService(PosRepository posRepository, CityRepository cityRepository, ConnectionTypeRepository connectionTypeRepository, IssueRepository issueRepository) {
         this.posRepository = posRepository;
         this.cityRepository = cityRepository;
         this.connectionTypeRepository = connectionTypeRepository;
+        this.issueRepository = issueRepository;
     }
 
     public List<PosBaseDto> findAll(){
-        List<Pos> posList = posRepository.findAll();
-        return posList.stream().map(PosMapper::mapToBaseDto).toList();
+        return issueRepository.findAllPosWithIssuesCount();
     }
 
     public PosBaseDto findById(Long id){
@@ -152,8 +153,6 @@ public class PosService {
 
         return PosMapper.mapToDetailedDto(pos);
     }
-
-
     private Pos getPos(Long id) {
         return posRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("POS with id " + id + " not found"));

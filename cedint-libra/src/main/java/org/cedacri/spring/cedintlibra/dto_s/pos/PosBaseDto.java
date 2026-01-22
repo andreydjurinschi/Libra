@@ -13,10 +13,10 @@ public class PosBaseDto {
     private String address;
     private String model;
     private String brand;
-    private Set<WeekDays> daysClosed;
     private LocalDate insertDate;
+    private Long issuesCount;
 
-    public PosBaseDto(Long id, String name, String telephone, String cellphone, String address, String model, String brand, Set<WeekDays> daysClosed, LocalDate insertDate) {
+    public PosBaseDto(Long id, String name, String telephone, String cellphone, String address, String model, String brand, LocalDate insertDate, Long issuesCount) {
         this.id = id;
         this.name = name;
         this.telephone = telephone;
@@ -24,8 +24,8 @@ public class PosBaseDto {
         this.address = address;
         this.model = model;
         this.brand = brand;
-        this.daysClosed = daysClosed;
         this.insertDate = insertDate;
+        this.issuesCount = issuesCount;
     }
 
     public String getName() {
@@ -76,14 +76,6 @@ public class PosBaseDto {
         this.brand = brand;
     }
 
-    public Set<WeekDays> getDaysClosed() {
-        return daysClosed;
-    }
-
-    public void setDaysClosed(Set<WeekDays> daysClosed) {
-        this.daysClosed = daysClosed;
-    }
-
     public LocalDate getInsertDate() {
         return insertDate;
     }
@@ -98,5 +90,13 @@ public class PosBaseDto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getIssuesCount() {
+        return issuesCount;
+    }
+
+    public void setIssuesCount(Long issuesCount) {
+        this.issuesCount = issuesCount;
     }
 }

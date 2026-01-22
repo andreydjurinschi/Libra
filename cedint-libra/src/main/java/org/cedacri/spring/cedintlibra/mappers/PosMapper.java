@@ -17,9 +17,9 @@ public class PosMapper {
                 pos.getCellphone(),
                 pos.getAddress(),
                 pos.getModel(),
-                pos.getBrand(),
-                pos.getDaysClosed(),
-                pos.getInsertDate()
+                pos.getBrand()
+                ,pos.getInsertDate(),
+                null
                 );
     }
 

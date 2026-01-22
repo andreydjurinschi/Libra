@@ -17,10 +17,6 @@ public class Issue {
     @JoinColumn(name = "id_pos", nullable = false)
     private Pos pos;
 
-/*    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_type") // TODO: return nullable false
-    private IssueType type;*/
-
     @Enumerated(EnumType.STRING)
     private GeneralType generalType;
 
