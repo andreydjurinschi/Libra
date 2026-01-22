@@ -24,7 +24,9 @@
                 <div class="row g-3">
                     <div class="col-xl-6">
                         <label class="form-label">Problem title <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" th:field="*{problemTitle}" placeholder="About problem" required>
+                        <label>
+                            <input type="text" class="form-control" th:field="*{problemTitle}" placeholder="About problem" required>
+                        </label>
                         <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('problemTitle')}" th:errors="*{problemTitle}"></div>
                     </div>
 

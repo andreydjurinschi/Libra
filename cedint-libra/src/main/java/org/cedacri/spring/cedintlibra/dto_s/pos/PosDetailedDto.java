@@ -9,6 +9,7 @@ import java.time.LocalTime;
 import java.util.Set;
 
 public class PosDetailedDto {
+    private Long id;
     private String name;
     private String telephone;
     private String cellphone;
@@ -24,7 +25,8 @@ public class PosDetailedDto {
     private Set<WeekDays> daysClosed;
     private LocalDate insertDate;
 
-    public PosDetailedDto(String name, String telephone, String cellphone, String address, String model, String brand, CityDto city, ConnectionTypeDto connectionType, LocalTime morningOpening, LocalTime morningClosing, LocalTime afternoonOpening, LocalTime afternoonClosing, Set<WeekDays> daysClosed, LocalDate insertDate) {
+    public PosDetailedDto(Long id, String name, String telephone, String cellphone, String address, String model, String brand, CityDto city, ConnectionTypeDto connectionType, LocalTime morningOpening, LocalTime morningClosing, LocalTime afternoonOpening, LocalTime afternoonClosing, Set<WeekDays> daysClosed, LocalDate insertDate) {
+        this.id = id;
         this.name = name;
         this.telephone = telephone;
         this.cellphone = cellphone;
@@ -151,5 +153,13 @@ public class PosDetailedDto {
 
     public void setInsertDate(LocalDate insertDate) {
         this.insertDate = insertDate;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

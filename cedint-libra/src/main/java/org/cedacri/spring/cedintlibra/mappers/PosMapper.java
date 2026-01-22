@@ -48,7 +48,8 @@ public class PosMapper {
         ConnectionTypeDto connectionTypeDto = ConnectionTypeMapper.mapToDto(pos.getConnectionType());
 
         return new PosDetailedDto(
-            pos.getName(),
+                pos.getId(),
+                pos.getName(),
                 pos.getTelephone(),
                 pos.getCellphone(),
                 pos.getAddress(),

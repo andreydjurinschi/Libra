@@ -1,10 +1,13 @@
 package org.cedacri.spring.cedintlibra.services.pos;
 
 import jakarta.transaction.Transactional;
+import org.cedacri.spring.cedintlibra.dto_s.issue.IssueBaseDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosBaseDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosCreateDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosDetailedDto;
+import org.cedacri.spring.cedintlibra.entity.Issue;
 import org.cedacri.spring.cedintlibra.entity.util_models.WeekDays;
+import org.cedacri.spring.cedintlibra.mappers.IssueMapper;
 import org.cedacri.spring.cedintlibra.mappers.PosMapper;
 import org.cedacri.spring.cedintlibra.entity.City;
 import org.cedacri.spring.cedintlibra.entity.ConnectionType;
@@ -17,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -43,6 +47,11 @@ public class PosService {
     public PosBaseDto findById(Long id){
         Pos pos = getPos(id);
         return PosMapper.mapToBaseDto(pos);
+    }
+
+    public List<IssueBaseDto> findAllByIssuesByPosId(Long posId){
+        List<Issue> issues = posRepository.getIssuesForPos(posId);
+        return issues.stream().map(IssueMapper::mapToBaseDto).toList();
     }
 
     @Transactional
