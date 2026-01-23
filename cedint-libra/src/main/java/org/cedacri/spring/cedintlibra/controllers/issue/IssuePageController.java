@@ -107,6 +107,12 @@ public class IssuePageController {
         return "redirect:/libra/home";
     }
 
+    @GetMapping("/libra/issues/status/{statusId}")
+    public String showIssuesByStatusPage(Model model, @PathVariable("statusId") Long statusId) {
+        model.addAttribute("issuesByStatus", issueService.getByStatus(statusId));
+        return "issue/issues-by-status";
+    }
+
     private void populateCreateIssueModel(Model model) {
         model.addAttribute("generalTypes", GeneralType.values());
         model.addAttribute("types", issueTypeService.getAll());
