@@ -23,34 +23,41 @@
         <div class="card-body">
             <div class="mb-4">
                 <label for="pos-name-label">Pos Name: <span>*</span></label>
-                <input type="text" class="form-control" placeholder="Enter Pos Name" id="pos-name-label" th:field="*{name}">
+                <input type="text" class="form-control" placeholder="Enter Pos Name" id="pos-name-label"
+                       th:field="*{name}">
             </div>
             <div class="mb-4">
                 <label for="pos-telephone-label">Pos telephone: <span>*</span></label>
-                <input type="text" class="form-control" placeholder="Enter Pos telephone" id="pos-telephone-label" th:field="*{telephone}">
+                <input type="text" class="form-control" placeholder="Enter Pos telephone" id="pos-telephone-label"
+                       th:field="*{telephone}">
             </div>
             <div class="mb-4">
                 <label for="pos-cellphone-label">Pos cellphone: <span>*</span></label>
-                <input type="text" class="form-control" placeholder="Enter Pos cellphone" id="pos-cellphone-label" th:field="*{cellphone}">
+                <input type="text" class="form-control" placeholder="Enter Pos cellphone" id="pos-cellphone-label"
+                       th:field="*{cellphone}">
             </div>
             <div class="mb-4">
                 <label for="pos-address-label">Pos address: <span>*</span></label>
-                <input type="text" class="form-control" placeholder="Enter Pos Name" id="pos-address-label" th:field="*{address}">
+                <input type="text" class="form-control" placeholder="Enter Pos Name" id="pos-address-label"
+                       th:field="*{address}">
             </div>
             <div class="mb-4">
                 <label for="pos-model-label">Pos Model: <span>*</span></label>
-                <input type="text" class="form-control" placeholder="Enter Pos Name" id="pos-model-label" th:field="*{model}">
+                <input type="text" class="form-control" placeholder="Enter Pos Name" id="pos-model-label"
+                       th:field="*{model}">
             </div>
             <div class="mb-4">
                 <label for="pos-brand-label">Pos Brand: <span>*</span></label>
-                <input type="text" class="form-control" placeholder="Enter Pos Name" id="pos-brand-label" th:field="*{brand}">
+                <input type="text" class="form-control" placeholder="Enter Pos Name" id="pos-brand-label"
+                       th:field="*{brand}">
             </div>
             <div class="mb-4">
                 <label for="pos-city-label" class="form-label">City</label>
                 <select id="pos-city-label" class="form-select" th:field="*{cityId}">
                     <option th:each="city : ${cities}"
                             th:value="${city.id}"
-                            th:text="${city.name}">CITY</option>
+                            th:text="${city.name}">CITY
+                    </option>
                 </select>
             </div>
             <div class="mb-4">
@@ -73,7 +80,44 @@
             </div>
         </div>
     </form>
+    <div class="table-responsive" th:if="${not #lists.isEmpty(posIssues)}">
 
+        <table class="table table-hover align-middle">
+            <thead class="table-dark">
+            <tr>
+                <th>problem title</th>
+                <th>priority</th>
+                <th>status</th>
+                <th>memo</th>
+                <th>created by</th>
+                <th>assigned to</th>
+                <th>description</th>
+                <th>solution</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="issue : ${posIssues}">
+                <td th:text="${issue.problemTitle}">undf</td>
+                <td th:text="${issue.priority}">undf</td>
+                <td th:switch="${issue.status}">
+                    <span th:case="1" class="badge bg-danger">NEW</span>
+                    <span th:case="2" class="badge bg-success">ASSIGNED</span>
+                    <span th:case="3" class="badge bg-info">IN_PROGRESS</span>
+                    <span th:case="4" class="badge bg-warning">PENDING</span>
+                </td>
+                <td th:text="${issue.memo}"></td>
+                <td th:text="${issue.userCreatedId}"></td>
+                <td th:text="${issue.assignedToId}"></td>
+                <td th:text="${issue.description}"></td>
+                <td th:text="${issue.solution}"></td>
+                <!-- TODO: solve problem logic -->
+                <button class="btn btn-success">Solve</button>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
 </div>
 </body>
 </html>
