@@ -62,6 +62,31 @@ public class IssuePageController {
     }
 
 
+    @GetMapping("/libra/issues/create/for/{posId}")
+    public String showCreateFormForSelectedPos(@PathVariable("posId") Long posId, Model model){
+
+        IssueCreateDto form = new IssueCreateDto();
+        form.setCreationDate(LocalDate.now());
+        form.setModifyDate(LocalDate.now());
+
+        UserDetails userDetails = getCurrentUser();
+        User currentUser = userRepository.findByLoginWithType(userDetails.getUsername());
+
+        form.setUserCreatedId(currentUser.getId());
+
+        form.setPosId(posId);
+        PosBaseDto selectedPos = posService.findById(posId);
+
+        model.addAttribute("form", form);
+        model.addAttribute("selectedPos", selectedPos);
+
+        populateCreateIssueModel(model);
+
+        return "issue/create-issue";
+    }
+
+
+
     @GetMapping("/libra/issues/create")
     public String showCreateIssueForm(Model model) {
 

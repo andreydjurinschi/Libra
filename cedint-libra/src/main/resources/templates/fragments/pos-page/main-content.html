@@ -29,7 +29,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="pos: ${allPos}">
+                    <tr th:each="pos: ${allPos}" th:attr="ondblclick=|handleDoubleClick('${pos.id}')|">
                         <td><a th:href="@{/libra/pos/detailed/{id}(id=${pos.id})}" class="btn btn-primary">Info</a></td>
                         <td th:text="${pos.name}">1</td>
                         <td th:text="${pos.model}">1</td>
