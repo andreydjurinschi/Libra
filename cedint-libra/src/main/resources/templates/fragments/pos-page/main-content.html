@@ -1,49 +1,79 @@
+
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>POS - All</title>
 </head>
 <body>
-<!-- TODO: pagination and search bar -->
+
 <div class="col-lg-10 py-3" th:fragment="main-content">
     <div class="border rounded-3 p-4">
-        <br>
-            <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
-                <h2 class="mb-0" th:text="${title}"></h2>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-hover align-middle">
-                    <thead class="table-primary">
-                    <tr>
-                        <th>Info</th>
-                        <th>Pos. Name</th>
-                        <th>Pos. Model</th>
-                        <th>Telephone</th>
-                        <th>Address</th>
-                        <th>Brand</th>
-                        <th>Active Issues</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="pos: ${allPos}" th:attr="ondblclick=|handleDoubleClick('${pos.id}')|">
-                        <td><a th:href="@{/libra/pos/detailed/{id}(id=${pos.id})}" class="btn btn-primary">Info</a></td>
-                        <td th:text="${pos.name}">1</td>
-                        <td th:text="${pos.model}">1</td>
-                        <td th:text="${pos.telephone}">1</td>
-                        <td th:text="${pos.address}">1</td>
-                        <td th:text="${pos.brand}">1</td>
-                        <td th:text="${pos.issuesCount}">1</td>
-                    </tr>
-                    </tbody>
-
-                </table>
-
-            </div>
+        <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
+            <h2 class="mb-0" th:text="${title}">All POS</h2>
         </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-primary">
+                <tr>
+                    <th>Info</th>
+                    <th>Pos. Name</th>
+                    <th>Pos. Model</th>
+                    <th>Telephone</th>
+                    <th>Address</th>
+                    <th>Brand</th>
+                    <th>Active Issues</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="pos : ${posPage.content}"
+                    th:attr="ondblclick=|handleDoubleClick('${pos.id}')|">
+                    <td>
+                        <a th:href="@{/libra/pos/detailed/{id}(id=${pos.id})}" class="btn btn-primary">Info</a>
+                    </td>
+                    <td th:text="${pos.name}">name</td>
+                    <td th:text="${pos.model}">model</td>
+                    <td th:text="${pos.telephone}">phone</td>
+                    <td th:text="${pos.address}">address</td>
+                    <td th:text="${pos.brand}">brand</td>
+                    <td th:text="${pos.issuesCount}">0</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <nav th:if="${posPage.totalPages > 1}">
+            <ul class="pagination">
+                <li class="page-item" th:classappend="${posPage.first} ? 'disabled'">
+                    <a class="page-link"
+                       th:href="@{|/libra/pos/all?page=${posPage.number - 1}&pageSize=${pageSize}|}">
+                        Prev
+                    </a>
+                </li>
+
+                <li class="page-item"
+                    th:each="i : ${#numbers.sequence(0, posPage.totalPages - 1)}"
+                    th:classappend="${i == posPage.number} ? 'active'">
+                    <a class="page-link"
+                       th:text="${i + 1}"
+                       th:href="@{|/libra/pos/all?page=${i}&pageSize=${pageSize}|}">
+                        1
+                    </a>
+                </li>
+                <li class="page-item" th:classappend="${posPage.last} ? 'disabled'">
+                    <a class="page-link"
+                       th:href="@{|/libra/pos/all?page=${posPage.number + 1}&pageSize=${pageSize}|}">
+                        Next
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
     </div>
+</div>
 </body>
 </html>

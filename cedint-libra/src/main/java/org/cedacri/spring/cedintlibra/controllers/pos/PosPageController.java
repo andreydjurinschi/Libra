@@ -1,13 +1,19 @@
 package org.cedacri.spring.cedintlibra.controllers.pos;
 
 import jakarta.validation.Valid;
+import org.cedacri.spring.cedintlibra.dto_s.pos.PosBaseDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosCreateDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosDetailedDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosUpdateDto;
 import org.cedacri.spring.cedintlibra.entity.util_models.WeekDays;
 import org.cedacri.spring.cedintlibra.services.city.CityService;
 import org.cedacri.spring.cedintlibra.services.connection_type.ConnectionTypeService;
+import org.cedacri.spring.cedintlibra.services.issue.IssueService;
 import org.cedacri.spring.cedintlibra.services.pos.PosService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Set;
 
@@ -41,13 +48,25 @@ public class PosPageController {
         this.connectionTypeService = connectionTypeService;
     }
 
+
     @GetMapping("/libra/pos/all")
-    public String showAllPoses(Model model){
+    public String showAllPoses(Model model,
+                               @RequestParam(defaultValue = "0") int page,
+                               @RequestParam(defaultValue = "5") int pageSize) {
         UserDetails userDetails = getUserData();
-        model.addAttribute("allPos", posService.findAll());
         model.addAttribute("userLogin", userDetails.getUsername());
-        return "/pos/allPos";
+
+        Pageable pageable = PageRequest.of(page, pageSize);
+
+        Page<PosBaseDto> posPage = posService.findAll(pageable);
+        model.addAttribute("posPage", posPage);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("pageSize", pageSize);
+
+
+        return "pos/allPos"; // убедись, что путь к шаблону корректный
     }
+
     @GetMapping("/libra/pos/create")
     public String showCreateForm(Model model) {
         model.addAttribute("form", new PosCreateDto());
