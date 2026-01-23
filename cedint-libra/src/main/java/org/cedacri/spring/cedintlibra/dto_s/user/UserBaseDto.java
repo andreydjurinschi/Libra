@@ -6,15 +6,15 @@ public class UserBaseDto {
     private String email;
     private String login;
     private String telephone;
+    private Long userTypeId;
 
-
-    public UserBaseDto(Long id, String name, String email, String login, String telephone) {
+    public UserBaseDto(Long id, String name, String email, String login, String telephone, Long userTypeId) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.login = login;
         this.telephone = telephone;
-
+        this.userTypeId = userTypeId;
     }
 
     public Long getId() {
@@ -55,5 +55,13 @@ public class UserBaseDto {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public Long getUserTypeId() {
+        return userTypeId;
+    }
+
+    public void setUserTypeId(Long userTypeId) {
+        this.userTypeId = userTypeId;
     }
 }

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -18,6 +18,7 @@
             <table class="table table-hover align-middle">
                 <thead class="table-primary">
                 <tr>
+                    <th></th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Login</th>
@@ -27,6 +28,9 @@
 
                 <tbody>
                 <tr th:each="user: ${userList}">
+                    <td>
+                        <a class="btn btn-primary" th:href="@{/libra/users/detailed/{id}(id=${user.id})}">info</a>
+                    </td>
                     <td th:text="${user.name}">1</td>
                     <td th:text="${user.email}">1</td>
                     <td th:text="${user.login}">1</td>

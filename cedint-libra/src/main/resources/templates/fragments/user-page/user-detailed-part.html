@@ -1,0 +1,58 @@
+
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+<body>
+
+<nav th:insert="~{fragments/general/nav-bar ::navBar }"></nav>
+
+<div class="col-lg-10 py-3" th:fragment="user-details">
+    <form th:action="@{/libra/users/update/{id} (id=${user.id})}"
+          th:object="${user}"
+          method="post">
+
+        <div class="card-body">
+            <div class="mb-4">
+                <label class="form-label" for="login">Login</label>
+                <input type="text" id="login" class="form-control" placeholder="enter user login" th:field="*{login}" required>
+            </div>
+            <div class="mb-4">
+                <label class="form-label" for="email">Email</label>
+                <input type="text" id="email" class="form-control" placeholder="enter user email" th:field="*{email}" required>
+            </div>
+            <div class="mb-4">
+                <label class="form-label" for="telephone">telephone</label>
+                <input type="text" id="telephone" class="form-control" placeholder="enter user telephone" th:field="*{telephone}" required>
+            </div>
+            <div class="mb-4">
+                <label class="form-label" for="name">Name</label>
+                <input type="text" id="name" class="form-control" placeholder="enter user name" th:field="*{name}" required>
+            </div>
+            <div class="mb-4">
+                <label class="form-label" for="user-type">user type</label>
+                <select class="form-select" id="user-type" th:field="*{userTypeId}">
+                    <option th:each="type : ${userTypes}"
+                    th:value="${type.id}"
+                    th:text="${type.userType}">
+                    </option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-check-lg me-1"></i> SAVE
+                </button>
+                <a th:href="@{/libra/users/all}" class="btn btn-outline-secondary">
+                    CLOSE
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

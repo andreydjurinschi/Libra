@@ -12,4 +12,5 @@ import java.util.NoSuchElementException;
 public interface UserRepository extends JpaRepository<User, Long> {
     @Query("select u from User u join fetch u.userType where u.login = :login")
     User findByLoginWithType(@Param("login") String login) throws NoSuchElementException;
+
 }
