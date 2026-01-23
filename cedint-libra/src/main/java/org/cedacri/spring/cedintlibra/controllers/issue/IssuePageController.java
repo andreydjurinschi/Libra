@@ -51,16 +51,15 @@ public class IssuePageController {
         this.userRepository = userRepository;
     }
 
-/*    @GetMapping("libra/issues/detailed/{id}")
+    @GetMapping("libra/issues/detailed/{id}")
     public String showDetailedPage(Model model, @PathVariable("id") Long id){
-
         IssueBaseDto issueBaseDto = issueService.getById(id);
         PosBaseDto posBaseDto = posService.findById(issueBaseDto.getPosId());
         model.addAttribute("id", id);
         model.addAttribute("issue", issueBaseDto);
         model.addAttribute("pos", posBaseDto);
         return "issue/issue-details-page";
-    }*/
+    }
 
 
     @GetMapping("/libra/issues/create")

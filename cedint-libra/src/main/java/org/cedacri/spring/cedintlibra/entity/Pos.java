@@ -5,7 +5,9 @@ import org.cedacri.spring.cedintlibra.entity.util_models.WeekDays;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -54,6 +56,10 @@ public class Pos {
     )
     @Column(name = "day_closed", nullable = false)
     private Set<WeekDays> daysClosed = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pos")
+    public List<Issue> issues = new ArrayList<>();
+
 
     private LocalDate insertDate;
 
@@ -190,5 +196,17 @@ public class Pos {
 
     public void setInsertDate(LocalDate insertDate) {
         this.insertDate = insertDate;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Issue> getIssues() {
+        return issues;
+    }
+
+    public void setIssues(List<Issue> issues) {
+        this.issues = issues;
     }
 }

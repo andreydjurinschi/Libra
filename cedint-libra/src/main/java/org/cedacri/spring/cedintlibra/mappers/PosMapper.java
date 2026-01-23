@@ -5,6 +5,7 @@ import org.cedacri.spring.cedintlibra.dto_s.connection_type.ConnectionTypeDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosBaseDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosCreateDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosDetailedDto;
+import org.cedacri.spring.cedintlibra.dto_s.pos.PosUpdateDto;
 import org.cedacri.spring.cedintlibra.entity.Pos;
 
 public class PosMapper {
@@ -17,13 +18,32 @@ public class PosMapper {
                 pos.getCellphone(),
                 pos.getAddress(),
                 pos.getModel(),
-                pos.getBrand(),
-                pos.getDaysClosed(),
-                pos.getInsertDate()
+                pos.getBrand()
+                ,pos.getInsertDate(),
+                null
                 );
     }
 
     public static Pos mapCreatePosDtoToEntity(PosCreateDto dto){
+        return new Pos(
+                dto.getName(),
+                dto.getTelephone(),
+                dto.getCellphone(),
+                dto.getAddress(),
+                dto.getModel(),
+                dto.getBrand(),
+                null,
+                null,
+                dto.getMorningOpening(),
+                dto.getMorningClosing(),
+                dto.getAfternoonOpening(),
+                dto.getAfternoonClosing(),
+                dto.getDaysClosed(),
+                dto.getInsertDate()
+        );
+    }
+
+    public static Pos mapUpdatePosDtoToEntity(PosUpdateDto dto){
         return new Pos(
                 dto.getName(),
                 dto.getTelephone(),
@@ -48,14 +68,17 @@ public class PosMapper {
         ConnectionTypeDto connectionTypeDto = ConnectionTypeMapper.mapToDto(pos.getConnectionType());
 
         return new PosDetailedDto(
-            pos.getName(),
+                pos.getId(),
+                pos.getName(),
                 pos.getTelephone(),
                 pos.getCellphone(),
                 pos.getAddress(),
                 pos.getModel(),
                 pos.getBrand(),
                 cityDto,
+                cityDto.getId(),
                 connectionTypeDto,
+                connectionTypeDto.getId(),
                 pos.getMorningOpening(),
                 pos.getMorningClosing(),
                 pos.getAfternoonOpening(),

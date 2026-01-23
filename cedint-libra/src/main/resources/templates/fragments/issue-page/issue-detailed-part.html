@@ -24,7 +24,9 @@
                 <div class="row g-3">
                     <div class="col-xl-6">
                         <label class="form-label">Problem title <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" th:field="*{problemTitle}" placeholder="About problem" required>
+                        <label>
+                            <input type="text" class="form-control" th:field="*{problemTitle}" placeholder="About problem" required>
+                        </label>
                         <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('problemTitle')}" th:errors="*{problemTitle}"></div>
                     </div>
 
@@ -34,16 +36,6 @@
                             <option th:each="genType : ${generalTypes}"
                                     th:value="${genType}"
                                     th:text="${genType}">GENERAL_TYPE</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-4 col-xl-3">
-                        <label class="form-label">Sub type</label>
-                        <select class="form-select" th:field="*{typeId}">
-                            <option value="">seelct type</option>
-                            <option th:each="t : ${types}"
-                                    th:value="${t.id}"
-                                    th:text="${t.name}">Type</option>
                         </select>
                     </div>
 
@@ -92,24 +84,6 @@
                     </div>
                 </div>
             </div>
-
-            <!--<div class="mb-4">
-                <h6 class="text-uppercase text-muted mb-3">Dates</h6>
-                <div class="row g-3">
-                    <div class="col-sm-6 col-lg-4">
-                        <label class="form-label">Creation date</label>
-                        <input type="date" class="form-control" th:field="*{creationDate}" readonly>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <label class="form-label">Assigned date</label>
-                        <input type="date" class="form-control" th:field="*{assignedDate}">
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <label class="form-label">Modified at</label>
-                        <input type="date" class="form-control" th:field="*{modifyDate}" readonly>
-                    </div>
-                </div>
-            </div>-->
             <div class="mb-4">
                 <h6 class="text-uppercase text-muted mb-3">Description</h6>
                 <div class="row g-3">

@@ -39,11 +39,11 @@ public class PosController {
     }
 */
 
-    @PutMapping("/update/{id}")
+/*    @PutMapping("/update/{id}")
     public ResponseEntity<Void> update(@RequestBody @Valid PosCreateDto dto, @PathVariable("id") Long id){
         posService.updatePos(id, dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
-    }
+    }*/
 
     @GetMapping("/info/{id}")
     public ResponseEntity<PosDetailedDto> getDetailedPos(@PathVariable Long id){

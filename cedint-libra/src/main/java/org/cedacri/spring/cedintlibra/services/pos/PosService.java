@@ -1,47 +1,56 @@
 package org.cedacri.spring.cedintlibra.services.pos;
 
 import jakarta.transaction.Transactional;
+import org.cedacri.spring.cedintlibra.dto_s.issue.IssueBaseDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosBaseDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosCreateDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosDetailedDto;
+import org.cedacri.spring.cedintlibra.dto_s.pos.PosUpdateDto;
+import org.cedacri.spring.cedintlibra.entity.Issue;
 import org.cedacri.spring.cedintlibra.entity.util_models.WeekDays;
+import org.cedacri.spring.cedintlibra.mappers.IssueMapper;
 import org.cedacri.spring.cedintlibra.mappers.PosMapper;
 import org.cedacri.spring.cedintlibra.entity.City;
 import org.cedacri.spring.cedintlibra.entity.ConnectionType;
 import org.cedacri.spring.cedintlibra.entity.Pos;
 import org.cedacri.spring.cedintlibra.repositories.CityRepository;
 import org.cedacri.spring.cedintlibra.repositories.ConnectionTypeRepository;
+import org.cedacri.spring.cedintlibra.repositories.IssueRepository;
 import org.cedacri.spring.cedintlibra.repositories.PosRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.Set;
 
 @Service
 public class PosService {
     private final PosRepository posRepository;
-
     private final CityRepository cityRepository;
+    private final IssueRepository issueRepository;
     private final ConnectionTypeRepository connectionTypeRepository;
 
-    public PosService(PosRepository posRepository, CityRepository cityRepository, ConnectionTypeRepository connectionTypeRepository) {
+    public PosService(PosRepository posRepository, CityRepository cityRepository, ConnectionTypeRepository connectionTypeRepository, IssueRepository issueRepository) {
         this.posRepository = posRepository;
         this.cityRepository = cityRepository;
         this.connectionTypeRepository = connectionTypeRepository;
+        this.issueRepository = issueRepository;
     }
 
     public List<PosBaseDto> findAll(){
-        List<Pos> posList = posRepository.findAll();
-        return posList.stream().map(PosMapper::mapToBaseDto).toList();
+        return issueRepository.findAllPosWithIssuesCount();
     }
 
     public PosBaseDto findById(Long id){
         Pos pos = getPos(id);
         return PosMapper.mapToBaseDto(pos);
+    }
+
+    public List<IssueBaseDto> findAllByIssuesByPosId(Long posId){
+        List<Issue> issues = posRepository.getIssuesForPos(posId);
+        return issues.stream().map(IssueMapper::mapToBaseDto).toList();
     }
 
     @Transactional
@@ -58,7 +67,7 @@ public class PosService {
 
 
     @Transactional
-    public void updatePos(Long id, PosCreateDto dto) {
+    public void updatePos(Long id, PosUpdateDto dto) {
 
         if (dto == null) {
             throw new IllegalArgumentException("dto cannot be null");
@@ -96,11 +105,11 @@ public class PosService {
         }
         pos.setBrand(dto.getBrand().trim());
 
-        if (dto.getCity() == null) {
+        if (dto.getCityId() == null) {
             throw new IllegalArgumentException("city is required");
         }
 
-        City city = cityRepository.findById(dto.getCity())
+        City city = cityRepository.findById(dto.getCityId())
                 .orElseThrow(() -> new NoSuchElementException("City not found"));
         pos.setCity(city);
 
@@ -128,16 +137,13 @@ public class PosService {
         pos.setAfternoonOpening(afternoonOpening);
         pos.setAfternoonClosing(afternoonClosing);
 
-        Set<WeekDays> daysClosed = dto.getDaysClosed();
-        pos.setDaysClosed(Objects.requireNonNullElse(daysClosed, Set.of()));
-
+        pos.setDaysClosed(new HashSet<>(WeekDays.FRI.ordinal()));
+      // TODO days closed logic
 
         if (dto.getInsertDate() == null) {
             throw new IllegalArgumentException("insertDate is required");
         }
         pos.setInsertDate(dto.getInsertDate());
-
-
         posRepository.save(pos);
     }
 
@@ -152,8 +158,6 @@ public class PosService {
 
         return PosMapper.mapToDetailedDto(pos);
     }
-
-
     private Pos getPos(Long id) {
         return posRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("POS with id " + id + " not found"));

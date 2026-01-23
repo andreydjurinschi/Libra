@@ -19,22 +19,24 @@
                 <table class="table table-hover align-middle">
                     <thead class="table-primary">
                     <tr>
+                        <th>Info</th>
                         <th>Pos. Name</th>
                         <th>Pos. Model</th>
                         <th>Telephone</th>
                         <th>Address</th>
                         <th>Brand</th>
-                        <!-- TODO: adding pos status logic (how many problems pos have)-->
+                        <th>Active Issues</th>
                     </tr>
                     </thead>
-
                     <tbody>
                     <tr th:each="pos: ${allPos}">
+                        <td><a th:href="@{/libra/pos/detailed/{id}(id=${pos.id})}" class="btn btn-primary">Info</a></td>
                         <td th:text="${pos.name}">1</td>
                         <td th:text="${pos.model}">1</td>
                         <td th:text="${pos.telephone}">1</td>
                         <td th:text="${pos.address}">1</td>
                         <td th:text="${pos.brand}">1</td>
+                        <td th:text="${pos.issuesCount}">1</td>
                     </tr>
                     </tbody>
 

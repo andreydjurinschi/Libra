@@ -15,7 +15,6 @@ public class CityMapper {
         city.setCityName(dto.getName());
         return city;
     }
-
     public static void mapUpdateDtoToExistingEntity(City existing, CityCreateUpdateDto dto) {
         existing.setCityName(dto.getName());
     }
