@@ -66,6 +66,11 @@ public class IssueService {
         return IssueMapper.mapToBaseDto(issueRepository.save(issue));
     }
 
+    public List<IssueBaseDto> getByStatus(Long statusId){
+        List<Issue> issues = issueRepository.getIssueByStatusId(statusId);
+        return issues.stream().map(IssueMapper::mapToBaseDto).toList();
+    }
+
     public IssueBaseDto update(Long id, IssueUpdateDto dto) {
         Issue issue = getEntity(id);
 

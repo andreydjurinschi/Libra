@@ -3,17 +3,21 @@ package org.cedacri.spring.cedintlibra.dto_s.user;
 import org.cedacri.spring.cedintlibra.dto_s.user_type.UserTypeDto;
 
 public class UserWithTypeDto {
+    private Long id;
     private String name;
     private String email;
     private String login;
     private String telephone;
+    private Long userTypeId;
     private UserTypeDto userType;
 
-    public UserWithTypeDto(String name, String email, String login, String telephone, UserTypeDto userType) {
+    public UserWithTypeDto(Long id, String name, String email, String login, String telephone, Long userTypeId, UserTypeDto userType) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.login = login;
         this.telephone = telephone;
+        this.userTypeId = userTypeId;
         this.userType = userType;
     }
 
@@ -55,5 +59,21 @@ public class UserWithTypeDto {
 
     public void setUserType(UserTypeDto userType) {
         this.userType = userType;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getUserTypeId() {
+        return userTypeId;
+    }
+
+    public void setUserTypeId(Long userTypeId) {
+        this.userTypeId = userTypeId;
     }
 }

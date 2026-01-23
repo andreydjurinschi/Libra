@@ -1,6 +1,7 @@
 package org.cedacri.spring.cedintlibra.controllers.home;
 
 import org.cedacri.spring.cedintlibra.services.issue.IssueService;
+import org.cedacri.spring.cedintlibra.services.status.StatusService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomePageController {
 
     private final IssueService issueService;
-    public HomePageController(IssueService issueService) {
+    private final StatusService statusService;
+    public HomePageController(IssueService issueService, StatusService statusService) {
         this.issueService = issueService;
+        this.statusService = statusService;
     }
 
     @GetMapping("/libra/home")

@@ -10,7 +10,7 @@ public class UserMapper {
 
     public static UserBaseDto mapToDto(User user){
         return new UserBaseDto(
-                user.getId(),user.getName(), user.getEmail(), user.getLogin(), user.getTelephone()
+                user.getId(),user.getName(), user.getEmail(), user.getLogin(), user.getTelephone(), user.getUserType().getId()
         );
     }
 
@@ -26,7 +26,7 @@ public class UserMapper {
 
     public static UserWithTypeDto mapToUserWithTypeDto(User user) {
         UserTypeDto userTypeDto = UserTypeMapper.mapToDto(user.getUserType());
-        return new UserWithTypeDto(user.getName(), user.getEmail(), user.getLogin(),user.getTelephone(), userTypeDto);
+        return new UserWithTypeDto(user.getId(), user.getName(), user.getEmail(), user.getLogin(),user.getTelephone(), userTypeDto.getId(), userTypeDto);
     }
 
 
