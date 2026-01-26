@@ -17,6 +17,8 @@ import org.cedacri.spring.cedintlibra.repositories.CityRepository;
 import org.cedacri.spring.cedintlibra.repositories.ConnectionTypeRepository;
 import org.cedacri.spring.cedintlibra.repositories.IssueRepository;
 import org.cedacri.spring.cedintlibra.repositories.PosRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -39,10 +41,17 @@ public class PosService {
         this.issueRepository = issueRepository;
     }
 
-    public List<PosBaseDto> findAll(){
-        return issueRepository.findAllPosWithIssuesCount();
+
+    public Page<PosBaseDto> findAll(Pageable pageable){
+        return issueRepository.findAllPosWithIssuesCount(pageable);
+    }
+    public Page<PosBaseDto> findAllByName(String name, Pageable pageable){
+        return issueRepository.findAllPosByName(name, pageable);
     }
 
+    public List<PosBaseDto> findAll(){
+        return issueRepository.findAllPosWithIssuesCount(Pageable.unpaged()).getContent();
+    }
     public PosBaseDto findById(Long id){
         Pos pos = getPos(id);
         return PosMapper.mapToBaseDto(pos);

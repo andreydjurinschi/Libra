@@ -2,6 +2,9 @@ package org.cedacri.spring.cedintlibra.repositories;
 
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosBaseDto;
 import org.cedacri.spring.cedintlibra.entity.Issue;
+import org.cedacri.spring.cedintlibra.entity.Pos;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -37,7 +40,20 @@ public interface IssueRepository extends JpaRepository<Issue, Long> {
                     p.brand,
                     p.insertDate
             """)
-    List<PosBaseDto> findAllPosWithIssuesCount();
+    Page<PosBaseDto> findAllPosWithIssuesCount(Pageable pageable);
+
+    @Query("""
+    SELECT new org.cedacri.spring.cedintlibra.dto_s.pos.PosBaseDto(
+        p.id, p.name, p.telephone, p.cellphone,
+        p.address, p.model, p.brand, p.insertDate, COUNT(i.id)
+    )
+    FROM Pos p
+    LEFT JOIN p.issues i
+    WHERE UPPER(p.name) LIKE UPPER(CONCAT('%', :name, '%'))
+    GROUP BY p.id, p.name, p.telephone, p.cellphone,
+             p.address, p.model, p.brand, p.insertDate
+""")
+    Page<PosBaseDto> findAllPosByName(@Param("name") String name, Pageable pageable);
 
     @Query(nativeQuery = true, value = "select * from ISSUES where ISSUES.ID_STATUS = :statusId")
     List<Issue> getIssueByStatusId(@Param("statusId") Long statusId);
