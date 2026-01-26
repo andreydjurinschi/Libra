@@ -5,6 +5,7 @@ import org.cedacri.spring.cedintlibra.dto_s.pos.PosBaseDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosCreateDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosDetailedDto;
 import org.cedacri.spring.cedintlibra.dto_s.pos.PosUpdateDto;
+import org.cedacri.spring.cedintlibra.entity.Pos;
 import org.cedacri.spring.cedintlibra.entity.util_models.WeekDays;
 import org.cedacri.spring.cedintlibra.services.city.CityService;
 import org.cedacri.spring.cedintlibra.services.connection_type.ConnectionTypeService;
@@ -52,19 +53,26 @@ public class PosPageController {
     @GetMapping("/libra/pos/all")
     public String showAllPoses(Model model,
                                @RequestParam(defaultValue = "0") int page,
-                               @RequestParam(defaultValue = "5") int pageSize) {
+                               @RequestParam(defaultValue = "5") int pageSize,
+                               @RequestParam(value = "name", required = false) String name
+    ) {
         UserDetails userDetails = getUserData();
         model.addAttribute("userLogin", userDetails.getUsername());
 
         Pageable pageable = PageRequest.of(page, pageSize);
 
-        Page<PosBaseDto> posPage = posService.findAll(pageable);
+        Page<PosBaseDto> posPage;
+        if(name == null){
+            posPage = posService.findAll(pageable);
+        }else{
+            posPage = posService.findAllByName(name, pageable);
+        }
         model.addAttribute("posPage", posPage);
         model.addAttribute("currentPage", page);
         model.addAttribute("pageSize", pageSize);
+        model.addAttribute("name", name);
 
-
-        return "pos/allPos"; // убедись, что путь к шаблону корректный
+        return "pos/allPos";
     }
 
     @GetMapping("/libra/pos/create")

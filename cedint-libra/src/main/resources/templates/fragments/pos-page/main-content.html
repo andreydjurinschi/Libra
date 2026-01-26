@@ -11,6 +11,15 @@
 <body>
 
 <div class="col-lg-10 py-3" th:fragment="main-content">
+    <form th:action="@{/libra/pos/all}" method="get" id="searchForm">
+        <input type="text" name="name"
+               th:value="${name}"
+               placeholder="Search pos by name">
+        <button type="submit" class="btn btn-info">Search</button>
+        <br>
+        <button type="reset" onclick="resetForm()" value="Reset" class="btn btn-danger">Reset</button>
+    </form>
+
     <div class="border rounded-3 p-4">
         <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
             <h2 class="mb-0" th:text="${title}">All POS</h2>
@@ -72,6 +81,7 @@
                 </li>
             </ul>
         </nav>
+
 
     </div>
 </div>

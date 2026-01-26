@@ -45,12 +45,13 @@ public class PosService {
     public Page<PosBaseDto> findAll(Pageable pageable){
         return issueRepository.findAllPosWithIssuesCount(pageable);
     }
+    public Page<PosBaseDto> findAllByName(String name, Pageable pageable){
+        return issueRepository.findAllPosByName(name, pageable);
+    }
 
-    @Deprecated
     public List<PosBaseDto> findAll(){
         return issueRepository.findAllPosWithIssuesCount(Pageable.unpaged()).getContent();
     }
-
     public PosBaseDto findById(Long id){
         Pos pos = getPos(id);
         return PosMapper.mapToBaseDto(pos);
